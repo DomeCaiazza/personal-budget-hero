@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   authenticate :user do
-
     namespace :mobile, module: :mobile do
       resources :costs
       resources :categories
@@ -23,9 +22,7 @@ Rails.application.routes.draw do
       resources :categories
       resources :costs
     end
-
   end
 
   root "mobile/costs#index"
-
 end

@@ -1,5 +1,5 @@
 class Desktop::CategoriesController < DesktopController
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [ :edit, :update, :destroy ]
 
   def index
     @categories = current_user.categories
@@ -14,7 +14,7 @@ class Desktop::CategoriesController < DesktopController
     @category = current_user.categories.build(category_params)
     authorize @category
     if @category.save
-      redirect_to desktop_categories_path, notice: t('labels.record_created')
+      redirect_to desktop_categories_path, notice: t("labels.record_created")
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Desktop::CategoriesController < DesktopController
   def update
     authorize @category
     if @category.update(category_params)
-      redirect_to desktop_categories_path(@category), notice: t('labels.record_modified')
+      redirect_to desktop_categories_path(@category), notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Desktop::CategoriesController < DesktopController
   def destroy
     authorize @category
     if @category.destroy
-      redirect_to desktop_categories_path, success: t('labels.record_destroyed')
+      redirect_to desktop_categories_path, success: t("labels.record_destroyed")
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@category.errors.full_messages.join(". ")}"
       redirect_to desktop_categories_path

@@ -1,6 +1,6 @@
 
   class Mobile::CategoriesController < MobileController
-    before_action :set_category, only: [:edit, :update, :destroy]
+    before_action :set_category, only: [ :edit, :update, :destroy ]
 
 
     def index
@@ -17,10 +17,10 @@
       authorize @category
 
       if @category.save
-        flash[:success] = t('labels.record_created')
-        redirect_to mobile_categories_path, success: t('labels.record_created')
+        flash[:success] = t("labels.record_created")
+        redirect_to mobile_categories_path, success: t("labels.record_created")
       else
-        flash[:danger] = @category.errors.full_messages.join('<br>').html_safe
+        flash[:danger] = @category.errors.full_messages.join("<br>").html_safe
         render :new, status: :unprocessable_entity
       end
     end
@@ -32,7 +32,7 @@
     def update
       authorize @category
       if @category.update(category_params)
-        redirect_to categories_path, notice: t('labels.record_modified')
+        redirect_to categories_path, notice: t("labels.record_modified")
       else
         render :edit
       end
@@ -41,7 +41,7 @@
     def destroy
       authorize @category
       @category.destroy
-      redirect_to categories_path, notice: t('labels.record_destroyed')
+      redirect_to categories_path, notice: t("labels.record_destroyed")
     end
 
     private
@@ -53,5 +53,4 @@
     def set_category
       @category = policy_scope(Category).find(params[:id])
     end
-
   end

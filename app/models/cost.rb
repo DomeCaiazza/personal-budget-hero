@@ -10,5 +10,4 @@ class Cost < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     %w[category user]
   end
-
 end

@@ -1,6 +1,6 @@
 class Mobile::CostsController < MobileController
-  before_action :set_cost, only: [:edit, :update]
-  before_action :set_categories, only: [:edit, :new]
+  before_action :set_cost, only: [ :edit, :update ]
+  before_action :set_categories, only: [ :edit, :new ]
   def index
     @costs = current_user.costs.order(id: :desc)
   end
@@ -18,10 +18,10 @@ class Mobile::CostsController < MobileController
     @cost = current_user.costs.new(cost_params)
     authorize @cost
     if @cost.save
-      flash[:success] = t('labels.record_created')
-      redirect_to new_mobile_cost_path, success: t('labels.record_created')
+      flash[:success] = t("labels.record_created")
+      redirect_to new_mobile_cost_path, success: t("labels.record_created")
     else
-      flash[:danger] = @cost.errors.full_messages.join('<br>').html_safe
+      flash[:danger] = @cost.errors.full_messages.join("<br>").html_safe
       render :new, status: :unprocessable_entity
     end
   end
@@ -29,7 +29,7 @@ class Mobile::CostsController < MobileController
   def update
     authorize @cost
     if @cost.update(cost_params)
-      redirect_to mobile_costs_path, notice: t('labels.record_modified')
+      redirect_to mobile_costs_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -48,5 +48,4 @@ class Mobile::CostsController < MobileController
   def set_categories
     @categories = current_user.categories
   end
-
 end

@@ -17,7 +17,7 @@ RSpec.describe Mobile::CostsController, type: :controller do
     it 'assigns @costs' do
       cost = create(:cost, user: user)
       get :index
-      expect(assigns(:costs)).to eq([cost])
+      expect(assigns(:costs)).to eq([ cost ])
     end
   end
 
@@ -55,7 +55,6 @@ RSpec.describe Mobile::CostsController, type: :controller do
           cost = assigns(:cost)
           puts cost.errors.full_messages unless cost.persisted? # Add this line to print validation errors
         }.to change(Cost, :count).by(1)
-
       end
 
       it 'redirects to the new cost path' do

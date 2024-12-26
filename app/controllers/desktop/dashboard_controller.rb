@@ -1,5 +1,4 @@
 class Desktop::DashboardController < DesktopController
-
   def index
     @user = current_user
     @categories = @user.categories
@@ -16,11 +15,11 @@ class Desktop::DashboardController < DesktopController
     @costs = @q.result
 
     # Raggruppiamo i costi per category_id e mese, calcolando la somma delle amount in una sola query.
-    costs_data = @costs.group(:category_id, Arel.sql('MONTH(date)')).sum(:amount)
+    costs_data = @costs.group(:category_id, Arel.sql("MONTH(date)")).sum(:amount)
 
     @category_data = {}
     @categories.each do |category|
-      monthly_sums = (1..12).map { |m| costs_data[[category.id, m]] || 0 }
+      monthly_sums = (1..12).map { |m| costs_data[[ category.id, m ]] || 0 }
       total = monthly_sums.sum
       avg = total / 12.0
 

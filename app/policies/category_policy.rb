@@ -19,5 +19,4 @@ class CategoryPolicy < ApplicationPolicy
   alias edit? index?
   alias destroy? index?
   alias generate_slug? index?
-
 end

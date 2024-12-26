@@ -40,11 +40,11 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'feathericon-sass'
+gem "feathericon-sass"
 
 gem "sassc-rails"
 
-gem 'ransack'
+gem "ransack"
 
 gem "kaminari"
 
@@ -59,13 +59,13 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'rspec-rails'
+  gem "rspec-rails"
 
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 
-  gem 'faker'
+  gem "faker"
 
-  gem 'shoulda-matchers'
+  gem "shoulda-matchers"
 end
 
 group :development do

@@ -18,7 +18,7 @@ RSpec.describe Mobile::CategoriesController, type: :controller do
     it 'assigns the current user\'s categories to @categories' do
       category = create(:category, user: user)
       get :index
-      expect(assigns(:categories)).to eq([category])
+      expect(assigns(:categories)).to eq([ category ])
     end
 
     describe 'GET #new' do

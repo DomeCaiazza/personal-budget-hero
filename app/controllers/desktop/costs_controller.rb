@@ -1,6 +1,6 @@
 class Desktop::CostsController < DesktopController
-  before_action :set_cost, only: [:edit, :update, :destroy]
-  before_action :set_categories, only: [:edit, :new, :update, :index, :create]
+  before_action :set_cost, only: [ :edit, :update, :destroy ]
+  before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
 
   def index
     params[:q] ||= {}
@@ -17,7 +17,7 @@ class Desktop::CostsController < DesktopController
     @cost = current_user.costs.build(cost_params)
     authorize @cost
     if @cost.save
-      redirect_to desktop_costs_path, notice: t('labels.record_created')
+      redirect_to desktop_costs_path, notice: t("labels.record_created")
     else
       render :new
     end
@@ -30,7 +30,7 @@ class Desktop::CostsController < DesktopController
   def update
     authorize @cost
     if @cost.update(cost_params)
-      redirect_to desktop_costs_path, notice: t('labels.record_modified')
+      redirect_to desktop_costs_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -39,7 +39,7 @@ class Desktop::CostsController < DesktopController
   def destroy
     authorize @cost
     if @cost.destroy
-      redirect_to desktop_costs_path, success: t('labels.record_destroyed')
+      redirect_to desktop_costs_path, success: t("labels.record_destroyed")
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@cost.errors.full_messages.join(". ")}"
       redirect_to desktop_costs_path

@@ -14,5 +14,4 @@ class User < ApplicationRecord
   def user?
     role == Role::USER
   end
-
 end
