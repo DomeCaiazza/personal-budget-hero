@@ -2,15 +2,19 @@ class Desktop::CategoriesController < DesktopController
   before_action :set_category, only: [ :edit, :update, :destroy ]
 
   def index
+    policy_scope(Category)
     @categories = current_user.categories
+    authorize(@categories)
   end
 
   def new
+    policy_scope(Category)
     @category = current_user.categories.build
     authorize @category
   end
 
   def create
+    policy_scope(Category)
     @category = current_user.categories.build(category_params)
     authorize @category
     if @category.save
@@ -25,6 +29,7 @@ class Desktop::CategoriesController < DesktopController
   end
 
   def update
+    policy_scope(@category)
     authorize @category
     if @category.update(category_params)
       redirect_to desktop_categories_path(@category), notice: t("labels.record_modified")
@@ -34,6 +39,7 @@ class Desktop::CategoriesController < DesktopController
   end
 
   def destroy
+    policy_scope(@category)
     authorize @category
     if @category.destroy
       redirect_to desktop_categories_path, success: t("labels.record_destroyed")

@@ -1,10 +1,12 @@
 
   class Mobile::CategoriesController < MobileController
-    before_action :set_category, only: [ :edit, :update, :destroy ]
+    before_action :set_category, only: [ :edit, :update ]
 
 
     def index
+      policy_scope(Category)
       @categories = current_user.categories
+      authorize(@categories)
     end
 
     def new
@@ -13,6 +15,7 @@
     end
 
     def create
+      policy_scope(Category)
       @category = current_user.categories.new(category_params)
       authorize @category
 
@@ -30,18 +33,13 @@
     end
 
     def update
+      policy_scope(@category)
       authorize @category
       if @category.update(category_params)
         redirect_to categories_path, notice: t("labels.record_modified")
       else
         render :edit
       end
-    end
-
-    def destroy
-      authorize @category
-      @category.destroy
-      redirect_to categories_path, notice: t("labels.record_destroyed")
     end
 
     private

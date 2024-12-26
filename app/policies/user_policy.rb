@@ -29,7 +29,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user.admin? || user.user?
   end
 
   def destroy?

@@ -29,4 +29,24 @@ RSpec.describe Category, type: :model do
       expect(category).to be_invalid
     end
   end
+
+  describe 'before destroy callback' do
+    it 'prevents deletion if there are associated costs' do
+      category_with_costs = FactoryBot.create(:category)
+      FactoryBot.create(:cost, category: category_with_costs)
+      expect { category_with_costs.destroy }.not_to change(Category, :count)
+      expect(category_with_costs.errors[:base]).to include("Cannot delete category with associated costs")
+    end
+
+    it 'allows deletion if there are no associated costs' do
+      category_without_costs = FactoryBot.create(:category)
+      expect { category_without_costs.destroy }.to change(Category, :count).by(-1)
+    end
+  end
+
+  describe 'ransackable attributes' do
+    it 'returns the correct attributes' do
+      expect(Category.ransackable_attributes).to match_array(%w[created_at hex_color id name updated_at user_id])
+    end
+  end
 end

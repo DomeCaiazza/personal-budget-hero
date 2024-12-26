@@ -1,9 +1,9 @@
 class Desktop::DashboardController < DesktopController
   def index
-    @user = current_user
-    @categories = @user.categories
+    policy_scope(Cost)
+    @categories = current_user.categories
     params[:q] ||= {}
-
+    authorize(Cost)
     # Se viene passato un anno, creiamo i filtri su base annuale
     if params.dig(:q, :date_eq).present?
       year = params[:q][:date_eq]
@@ -11,7 +11,7 @@ class Desktop::DashboardController < DesktopController
       params[:q][:date_lteq] = "#{year}-12-31"
     end
 
-    @q = @user.costs.ransack(params[:q])
+    @q = current_user.costs.ransack(params[:q])
     @costs = @q.result
 
     # Raggruppiamo i costi per category_id e mese, calcolando la somma delle amount in una sola query.

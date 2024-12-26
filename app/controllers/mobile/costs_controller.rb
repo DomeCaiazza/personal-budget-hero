@@ -2,7 +2,9 @@ class Mobile::CostsController < MobileController
   before_action :set_cost, only: [ :edit, :update ]
   before_action :set_categories, only: [ :edit, :new ]
   def index
+    policy_scope(Cost)
     @costs = current_user.costs.order(id: :desc)
+    authorize(@costs)
   end
 
   def new
@@ -15,6 +17,7 @@ class Mobile::CostsController < MobileController
   end
 
   def create
+    policy_scope(Cost)
     @cost = current_user.costs.new(cost_params)
     authorize @cost
     if @cost.save

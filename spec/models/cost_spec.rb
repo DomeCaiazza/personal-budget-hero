@@ -44,4 +44,14 @@ RSpec.describe Cost, type: :model do
       expect(cost).to be_invalid
     end
   end
+
+  describe 'ransackable attributes/associations' do
+    it 'returns the correct attributes' do
+      expect(Cost.ransackable_attributes).to match_array(%w[amount category_id created_at date description fixed id paid updated_at user_id category_name])
+    end
+
+    it 'returns the correct associations' do
+      expect(Cost.ransackable_associations).to match_array(%w[category user])
+    end
+  end
 end

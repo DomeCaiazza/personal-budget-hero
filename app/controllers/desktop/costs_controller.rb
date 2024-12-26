@@ -3,17 +3,21 @@ class Desktop::CostsController < DesktopController
   before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
 
   def index
+    policy_scope(Cost)
     params[:q] ||= { date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month }
     @q = current_user.costs.ransack(params[:q])
     @costs = @q.result
+    authorize(@costs)
   end
 
   def new
+    policy_scope(Cost)
     @cost = current_user.costs.build
     authorize @cost
   end
 
   def create
+    policy_scope(Cost)
     @cost = current_user.costs.build(cost_params)
     authorize @cost
     if @cost.save
@@ -37,6 +41,7 @@ class Desktop::CostsController < DesktopController
   end
 
   def destroy
+    policy_scope(@cost)
     authorize @cost
     if @cost.destroy
       redirect_to desktop_costs_path, success: t("labels.record_destroyed")
