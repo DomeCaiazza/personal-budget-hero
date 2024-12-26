@@ -3,6 +3,12 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require 'devise'
 
+if ENV['RAILS_ENV'] == 'test'
+  require 'simplecov'
+  SimpleCov.start 'rails'
+  puts "required simplecov"
+end
+
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?

@@ -3,7 +3,7 @@ class Desktop::CostsController < DesktopController
   before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
 
   def index
-    params[:q] ||= {}
+    params[:q] ||= {date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month}
     @q = current_user.costs.ransack(params[:q])
     @costs = @q.result
   end
