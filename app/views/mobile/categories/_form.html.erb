@@ -1,0 +1,30 @@
+<%= form_for [:mobile, @category], class: '' do |f| %>
+  <div class="row mb-3">
+    <div class="form-group">
+
+      <div class="mb-3 col-6">
+        <%= f.label :name, class: 'form-label form-control-lg' %>
+        <%= f.text_field :name,
+                         class: 'form-control form-control-lg',
+                         autofocus: true,
+                         required: true,
+                         enterkeyhint: 'next' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :hex_color, "Color", class: 'form-label form-control-lg' %>
+        <%= f.color_field :hex_color,
+                          class: 'form-control form-control-lg',
+                          required: true,
+                          value: ['#16a085', '#2980b9', '#8e44ad', '#d35400', '#c0392b', '#2c3e50', '#f39c12'].sample,
+                          enterkeyhint: 'next' %>
+      </div>
+
+      <div class="mb-3 col-sm-offset-2 text-end">
+        <%= f.submit 'Save', class: 'btn btn-primary btn-lg' %>
+      </div>
+
+    </div>
+
+  </div>
+<% end %>

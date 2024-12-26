@@ -1,0 +1,29 @@
+<%= form_for [:desktop, @category], class: 'mb-4' do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@category.errors.count, "error") %>:</h2>
+      <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :name, "Nome", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :hex_color, "Colore (HEX)", class: "form-label" %>
+    <%= f.color_field :hex_color,
+                      class: "form-control form-control-color",
+                      style: "width: 3rem; padding: 0;",
+                      value: ['#16a085', '#2980b9', '#8e44ad', '#d35400', '#c0392b', '#2c3e50', '#f39c12'].sample %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.submit @category.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
+  </div>
+<% end %>

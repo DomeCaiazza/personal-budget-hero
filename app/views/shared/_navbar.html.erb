@@ -1,0 +1,21 @@
+<div class="position-sticky">
+  <ul class="nav flex-column" style="height: 100vh">
+    <li class="nav-item">
+      <%= link_to "Utenti", admin_users_path, class: "nav-link #{selected_menu([admin_users_path], { start_with: true })} " if policy(User).index? %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Banner", admin_mastheads_path, class: "nav-link #{selected_menu([admin_mastheads_path], { start_with: true })} " if policy(Masthead).index? %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Magazine", admin_articles_path, class: "nav-link #{selected_menu([admin_articles_path], { start_with: true })} " if policy(Article).index? %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Tag", admin_tags_path, class: "nav-link #{selected_menu([admin_tags_path], { start_with: true })} " if policy(Tag).index? %>
+    </li>
+    <li class="nav-item mt-md-auto">
+      <%= link_to t("labels.exit"), destroy_user_session_path, class: "nav-link px-3", data: { turbo_method: :delete } %>
+    </li>
+  </ul>
+</div>
+
+

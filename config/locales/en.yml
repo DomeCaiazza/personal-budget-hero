@@ -1,0 +1,166 @@
+en:
+  date:
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+    abbr_month_names:
+      -
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d %b %Y"
+      very_long: "%d %B %Y"
+      short: "%d %b"
+      date_time: "%d %B %Y - %H:%M"
+    month_names:
+      -
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    order:
+      - :day
+      - :month
+      - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about an hour
+        other: about %{count} hours
+      about_x_months:
+        one: about a month
+        other: about %{count} months
+      about_x_years:
+        one: about a year
+        other: about %{count} years
+      almost_x_years:
+        one: about 1 year
+        other: about %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than a second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over a year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Second
+      year: Year
+  time:
+    am: am
+    formats:
+      default: "%a %d %b %Y, %H:%M:%S %z"
+      long: "%d %B %Y %H:%M"
+      short: "%d %b %Y - %H:%M"
+      time_only: "%H:%M"
+      date_time: "%d/%m/%Y - %H:%M"
+      only_date: "%d %B %Y"
+    pm: pm
+  labels:
+    login: Login
+    signup: Sign Up
+    search: Search
+    cancel: Cancel
+    new: New
+    update: Update
+    destroy: Delete
+    modify: Edit
+    edit: Edit
+    back: Back
+    profile: Profile
+    exit: Logout
+    save: Save
+    record_created: Record created
+    record_modified: Field modified
+    record_destroyed: Field deleted
+    error_record_created: Error creating record
+    error_record_modified: Error modifying record
+    error_record_destroyed: Error deleting record
+    confirm_delete: Are you sure you want to delete this record?
+    record_creation_failed: "Failed to create record: %{errors}"
+    role_assignment_forbidden: "You are not authorized to assign the %{role} role."
+    cannot_delete_admin: "You cannot delete an admin user."
+    home: Home
+    users: Users
+    site: Site
+    filter: Filter
+    find_for: 'Search for '
+    clear: Clear
+    uploaded_at: Uploaded at
+    enable: enable
+    disable: disable
+    admin: Admin
+    save_draft: Save as Draft
+    rescue_value: "-"
+  helpers:
+    select:
+      prompt: No selection
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No &nbspresults&nbsp found"
+          one: "Found &nbsp<b>1</b>&nbsp %{entry_name}"
+          other: "Found &nbsp<b>%{count}</b>&nbsp %{entry_name}"
+      more_pages:
+        display_entries: "Found %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> total"
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "&hellip;"

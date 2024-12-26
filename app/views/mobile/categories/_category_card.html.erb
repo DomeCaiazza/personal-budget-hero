@@ -1,0 +1,7 @@
+<div class="card mb-2">
+  <%= link_to edit_mobile_category_path(category), class: ' link-underline link-underline-opacity-0' do %>
+    <div class="card-body" style="background-color: <%= category.hex_color %>">
+      <h5 class="card-title mb-1 <%= category.hex_color.blank? ? "text-black" : "text-white" %>"><%= category.name %></h5>
+    </div>
+  <%- end %>
+</div>

@@ -1,0 +1,11 @@
+<%= render 'header' %>
+<div class="container my-3">
+  <% if @categories.any? %>
+
+    <%= render partial: 'mobile/categories/category_card', collection: @categories, as: :category %>
+  <% else %>
+    <div class="alert alert-info" role="alert">
+      <%= t('labels.no_categories') %>
+    </div>
+  <% end %>
+</div>

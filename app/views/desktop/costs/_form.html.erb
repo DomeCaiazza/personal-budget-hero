@@ -1,0 +1,72 @@
+<%= form_for [:desktop, @cost], class: 'mb-4' do |f| %>
+  <% if @cost.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@cost.errors.count, "error") %>:</h2>
+      <ul>
+        <% @cost.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :description, t('activerecord.attributes.cost.description'), class: "form-label" %>
+    <%= f.text_field :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :category_id, t('activerecord.attributes.cost.category_id'), class: 'form-label' %>
+    <%= f.select :category_id,
+                 options_from_collection_for_select(@categories, :id, :name, selected: @cost.category_id),
+                 { include_blank: '---', required: true, default: 'q' },
+                 class: 'form-control' %>
+
+    <%= link_to 'Handle categories', desktop_categories_path, class: '' %>
+  </div>
+
+
+  <div class="mb-3">
+    <%= f.label :date, t('activerecord.attributes.cost.date'), class: 'form-label' %>
+    <%= f.date_field :date,
+                     class: 'form-control form-control',
+                     autocomplete: 'off',
+                     data: { field: :title },
+                     placeholder: 'e.g. coffee with colleagues',
+                     required: true %>
+  </div>
+
+  <div class="text-end">
+    <button type="button" data-controller="costs" data-action="click->costs#setDateField" data-costs-day="yesterday" class="btn btn-sm btn-secondary mt-2 text-end">Yesterday</button>
+    <button type="button" data-controller="costs" data-action="click->costs#setDateField" data-costs-day="today" class="btn btn-sm btn-secondary mt-2 text-end">Today</button>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :amount, class: 'form-label' %>
+    <div class="input-group">
+      <span class="input-group-text">€</span>
+      <%= f.number_field :amount,
+                         class: 'form-control form-control',
+                         step: '0.01',
+                         required: true,
+                         inputmode: 'decimal' %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :paid, t('activerecord.attributes.cost.paid'), class: 'form-label' %>
+    <%= f.check_box :paid,
+                    class: 'form-check-input',
+                    required: true %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :fixed, t('activerecord.attributes.cost.fixed'), class: 'form-label' %>
+    <%= f.check_box :fixed,
+                    class: 'form-check-input'
+    %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.submit @cost.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
+  </div>
+<% end %>

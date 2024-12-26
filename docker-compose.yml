@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db_personal_budget_hero:
+    image: mysql:8.0
+    platform: linux/x86_64
+    container_name: personal_budget_hero
+    ports:
+      - "4100:3306"
+    volumes:
+      - ~/docker_mysql/personal_budget_hero:/var/lib/mysql/
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD: ""

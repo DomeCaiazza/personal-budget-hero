@@ -1,0 +1,19 @@
+<h2>Categories</h2>
+<div class="text-end">
+  <%= link_to t('labels.new'), new_desktop_category_path, class: 'btn btn-sm btn-primary' %>
+</div>
+
+<div class="table-responsive small">
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Color</th>
+      <th scope="col">Name</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: 'desktop/categories/category', collection: @categories, as: :category %>
+    </tbody>
+  </table>
+</div>
