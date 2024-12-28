@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Mobile::CategoriesController, type: :controller do
+RSpec.describe Desktop::CategoriesController, type: :controller do
   let(:user) { create(:user) }
   let(:category) { create(:category, user: user) }
 
@@ -43,7 +43,7 @@ RSpec.describe Mobile::CategoriesController, type: :controller do
 
         it 'redirects to the new category path' do
           post :create, params: { category: attributes_for(:category) }
-          expect(response).to redirect_to(mobile_categories_path)
+          expect(response).to redirect_to(desktop_categories_path)
         end
       end
 
@@ -76,7 +76,7 @@ RSpec.describe Mobile::CategoriesController, type: :controller do
 
       context 'when the user is not authorized' do
         it 'raises a ActiveRecord::RecordNotFound' do
-          other_user = create(:user)
+            other_user = create(:user)
           other_category = create(:category, user: other_user)
           expect {
             get :edit, params: { id: other_category.id }
@@ -95,7 +95,7 @@ RSpec.describe Mobile::CategoriesController, type: :controller do
 
         it 'redirects to the categories path' do
           patch :update, params: { id: category.id, category: { name: 'Updated Name' } }
-          expect(response).to redirect_to(mobile_categories_path)
+          expect(response).to redirect_to(desktop_categories_path)
         end
       end
 
@@ -119,6 +119,35 @@ RSpec.describe Mobile::CategoriesController, type: :controller do
           expect {
             patch :update, params: { id: other_category.id, category: { name: 'Updated Name' } }
           }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      describe 'DELETE #destroy' do
+        context 'when the category is successfully destroyed' do
+          it 'redirects to the categories path with a success message' do
+            delete :destroy, params: { id: category.id }
+            expect(response).to redirect_to(desktop_categories_path)
+            expect(flash[:success]).to eq(I18n.t("labels.record_destroyed"))
+          end
+        end
+
+        context 'when the category cannot be destroyed' do
+          it 'redirects to the categories path with an error message' do
+            create(:cost, category: category)
+            delete :destroy, params: { id: category.id }
+            expect(response).to redirect_to(desktop_categories_path)
+            expect(flash[:danger]).to include(I18n.t("labels.error_record_destroyed"))
+          end
+        end
+
+        context 'when the user is not authorized' do
+          it 'raises a ActiveRecord::RecordNotFound' do
+            other_user = create(:user)
+            other_category = create(:category, user: other_user)
+            expect {
+              delete :destroy, params: { id: other_category.id }
+            }.to raise_error(ActiveRecord::RecordNotFound)
+          end
         end
       end
     end

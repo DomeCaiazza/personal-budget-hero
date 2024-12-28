@@ -8,38 +8,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
-  def user_has_admin_or_user_privileges?
-    @user.admin? || @user.user?
-  end
-
   class Scope
     def initialize(user, scope)
       @user = user
@@ -54,4 +22,18 @@ class ApplicationPolicy
 
     attr_reader :user, :scope
   end
+
+  def index?
+    false
+  end
+
+  def user_has_admin_or_user_privileges?
+    @user.admin? || @user.user?
+  end
+
+  alias show? index?
+  alias create? index?
+  alias new? index?
+  alias update? index?
+  alias destroy? index?
 end

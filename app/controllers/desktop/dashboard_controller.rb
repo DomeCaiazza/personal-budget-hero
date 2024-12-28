@@ -4,7 +4,6 @@ class Desktop::DashboardController < DesktopController
     @categories = current_user.categories
     params[:q] ||= {}
     authorize(Cost)
-    # Se viene passato un anno, creiamo i filtri su base annuale
     if params.dig(:q, :date_eq).present?
       year = params[:q][:date_eq]
       params[:q][:date_gteq] = "#{year}-01-01"
@@ -13,17 +12,22 @@ class Desktop::DashboardController < DesktopController
 
     @q = current_user.costs.ransack(params[:q])
     @costs = @q.result
-
-    # Raggruppiamo i costi per category_id e mese, calcolando la somma delle amount in una sola query.
     costs_data = @costs.group(:category_id, Arel.sql("MONTH(date)")).sum(:amount)
 
-    @category_data = {}
-    @categories.each do |category|
+    @category_data = build_category_data(@categories, costs_data)
+  end
+
+  protected
+
+  def build_category_data(categories, costs_data)
+    category_data = {}
+    categories.each do |category|
+      Rails.logger.info "SONO DENTRO build_category_data!"
       monthly_sums = (1..12).map { |m| costs_data[[ category.id, m ]] || 0 }
       total = monthly_sums.sum
       avg = total / 12.0
 
-      @category_data[category.id] = {
+      category_data[category.id] = {
         name: category.name,
         color: category.hex_color,
         monthly_sums: monthly_sums,
@@ -31,5 +35,6 @@ class Desktop::DashboardController < DesktopController
         avg: avg
       }
     end
+    category_data
   end
 end

@@ -33,10 +33,9 @@
     end
 
     def update
-      policy_scope(@category)
-      authorize @category
+      authorize(@category)
       if @category.update(category_params)
-        redirect_to categories_path, notice: t("labels.record_modified")
+        redirect_to mobile_categories_path, notice: t("labels.record_modified")
       else
         render :edit
       end
@@ -49,6 +48,7 @@
     end
 
     def set_category
-      @category = policy_scope(Category).find(params[:id])
+      policy_scope(Category)
+      @category = current_user.categories.find(params[:id])
     end
   end

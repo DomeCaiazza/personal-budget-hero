@@ -44,16 +44,17 @@ class Desktop::CostsController < DesktopController
     policy_scope(@cost)
     authorize @cost
     if @cost.destroy
-      redirect_to desktop_costs_path, success: t("labels.record_destroyed")
+      flash[:success] = t("labels.record_destroyed")
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@cost.errors.full_messages.join(". ")}"
-      redirect_to desktop_costs_path
     end
+    redirect_to desktop_costs_path
   end
 
   private
 
   def set_cost
+    policy_scope(Cost)
     @cost = current_user.costs.find(params[:id])
   end
 
@@ -62,6 +63,7 @@ class Desktop::CostsController < DesktopController
   end
 
   def set_categories
+    policy_scope(Category)
     @categories = current_user.categories
   end
 end

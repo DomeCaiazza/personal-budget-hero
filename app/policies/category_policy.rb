@@ -1,5 +1,9 @@
 class CategoryPolicy < ApplicationPolicy
   class Scope < Scope
+    def initialize(user, scope)
+      @user  = user
+      @scope = scope
+    end
     def resolve
       if user.admin? || user.user?
         scope

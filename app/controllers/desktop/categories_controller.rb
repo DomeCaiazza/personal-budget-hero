@@ -29,10 +29,9 @@ class Desktop::CategoriesController < DesktopController
   end
 
   def update
-    policy_scope(@category)
     authorize @category
     if @category.update(category_params)
-      redirect_to desktop_categories_path(@category), notice: t("labels.record_modified")
+      redirect_to desktop_categories_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -42,7 +41,8 @@ class Desktop::CategoriesController < DesktopController
     policy_scope(@category)
     authorize @category
     if @category.destroy
-      redirect_to desktop_categories_path, success: t("labels.record_destroyed")
+      flash[:success] = t("labels.record_destroyed")
+      redirect_to desktop_categories_path
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@category.errors.full_messages.join(". ")}"
       redirect_to desktop_categories_path
@@ -52,6 +52,7 @@ class Desktop::CategoriesController < DesktopController
   private
 
   def set_category
+    policy_scope(Category)
     @category = current_user.categories.find(params[:id])
   end
 
