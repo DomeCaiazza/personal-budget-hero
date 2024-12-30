@@ -22,7 +22,6 @@ class Desktop::DashboardController < DesktopController
   def build_category_data(categories, costs_data)
     category_data = {}
     categories.each do |category|
-      Rails.logger.info "SONO DENTRO build_category_data!"
       monthly_sums = (1..12).map { |m| costs_data[[ category.id, m ]] || 0 }
       total = monthly_sums.sum
       avg = total / 12.0

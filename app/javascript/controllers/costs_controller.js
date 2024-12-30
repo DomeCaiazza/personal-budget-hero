@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import {Controller} from "@hotwired/stimulus"
 
 export default class extends Controller {
     setDateField(event) {
@@ -39,6 +39,12 @@ export default class extends Controller {
         } else if (month === 'this-month') {
             const startOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 2);
             const endOfThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+            startDate = startOfThisMonth.toISOString().slice(0, 10);
+            endDate = endOfThisMonth.toISOString().slice(0, 10);
+        } else if (month === 'all') {
+            const startOfThisMonth = new Date('1970-01-01');
+            const endOfThisMonth = new Date('2100-01-01');
 
             startDate = startOfThisMonth.toISOString().slice(0, 10);
             endDate = endOfThisMonth.toISOString().slice(0, 10);

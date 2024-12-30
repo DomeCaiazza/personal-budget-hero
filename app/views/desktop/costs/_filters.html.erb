@@ -17,6 +17,7 @@
       <%= f.label :date_lteq, 'End Date', class: 'control-label' %>
       <%= f.date_field :date_lteq, class: 'form-control', placeholder: 'End Date' %>
       <div class="text-end">
+        <button type="button" data-controller="costs" data-action="click->costs#setMonthField" data-costs-month="all" class="btn btn-sm btn-secondary mt-2 text-end">All</button>
         <button type="button" data-controller="costs" data-action="click->costs#setMonthField" data-costs-month="last-month" class="btn btn-sm btn-secondary mt-2 text-end">Last month</button>
         <button type="button" data-controller="costs" data-action="click->costs#setMonthField" data-costs-month="this-month" class="btn btn-sm btn-secondary mt-2 text-end">This month</button>
       </div>

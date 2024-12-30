@@ -16,7 +16,6 @@ RSpec.describe Desktop::CostsController, type: :controller do
     end
 
     it 'assigns @costs' do
-      cost = create(:cost, user: user)
       get :index
       expect(assigns(:costs)).to eq([ cost ])
     end

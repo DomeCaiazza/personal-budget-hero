@@ -17,30 +17,13 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    create?
-  end
-
-  def new?
-    create?
-  end
-
-  def show?
-    create?
-  end
-
-  def create?
     user_has_admin_or_user_privileges?
   end
 
-  def destroy?
-    update?
-  end
-
-  def edit?
-    update?
-  end
-
-  def update?
-    user.admin? || record.id == user.id
-  end
+  alias new? index?
+  alias create? index?
+  alias update? index?
+  alias edit? index?
+  alias destroy? index?
+  alias generate_slug? index?
 end
