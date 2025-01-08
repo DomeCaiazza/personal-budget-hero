@@ -2,4 +2,4 @@
 // import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
-import "controllers/costs_controller"
+import "controllers/transactions_controller"

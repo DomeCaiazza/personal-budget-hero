@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_15_222359) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_08_182815) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "hex_color"
@@ -20,7 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_222359) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "costs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "transactions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "description"
     t.decimal "amount", precision: 10, scale: 2
     t.date "date"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_222359) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "category_id"
+    t.integer "transaction_type", default: 0
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

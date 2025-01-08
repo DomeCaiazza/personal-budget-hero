@@ -20,9 +20,9 @@ RSpec.describe Desktop::DashboardController, type: :controller do
         expect(assigns(:categories)).to eq(user.categories)
       end
 
-      it 'assigns the correct costs to @costs based on the query' do
+      it 'assigns the correct transactions to @transactions based on the query' do
         get :index, params: { q: { date_gteq: '2023-01-01', date_lteq: '2023-12-31' } }
-        expect(assigns(:costs)).to eq(user.costs.where(date: '2023-01-01'..'2023-12-31'))
+        expect(assigns(:transactions)).to eq(user.transactions.where(date: '2023-01-01'..'2023-12-31'))
       end
 
       it 'calculates the correct monthly sums for each category' do
@@ -58,7 +58,7 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       end
     end
 
-    it 'sets monthly sums to zero for months with no costs' do
+    it 'sets monthly sums to zero for months with no transactions' do
       get :index
       assigns(:category_data).each do |category_id, data|
         expect(data[:monthly_sums].count(0)).to be >= 0
@@ -95,7 +95,7 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       end
     end
 
-    it 'sets monthly sums to zero for months with no costs' do
+    it 'sets monthly sums to zero for months with no transactions' do
       get :index
       assigns(:category_data).each do |category_id, data|
         expect(data[:monthly_sums].count(0)).to be >= 0
@@ -125,8 +125,8 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       end
     end
 
-    it 'handles categories with no costs correctly' do
-      allow_any_instance_of(User).to receive(:costs).and_return(Cost.none)
+    it 'handles categories with no transactions correctly' do
+      allow_any_instance_of(User).to receive(:transactions).and_return(Transaction.none)
       get :index
       assigns(:category_data).each do |category_id, data|
         expect(data[:monthly_sums]).to all(eq(0))
@@ -135,8 +135,8 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       end
     end
 
-    it 'handles categories with costs in some months correctly' do
-      allow_any_instance_of(User).to receive(:costs).and_return(Cost.where(date: '2023-01-01'..'2023-06-30'))
+    it 'handles categories with transactions in some months correctly' do
+      allow_any_instance_of(User).to receive(:transactions).and_return(Transaction.where(date: '2023-01-01'..'2023-06-30'))
       get :index
       assigns(:category_data).each do |category_id, data|
         expect(data[:monthly_sums][0..5].sum).to eq(data[:total])
@@ -150,7 +150,7 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       let(:category2) { create(:category, user: user, name: "Auto") }
 
       let(:categories) { [ category1, category2 ] }
-      let(:costs_data) do
+      let(:transactions_data) do
         {
           [ category1.id, 1 ] => 10,
           [ category1.id, 2 ] => 20,
@@ -160,7 +160,7 @@ RSpec.describe Desktop::DashboardController, type: :controller do
       end
 
       it 'calc monthly sums, total e avg' do
-        result = controller.send(:build_category_data, categories, costs_data)
+        result = controller.send(:build_category_data, categories, transactions_data)
 
         expect(result[category1.id][:monthly_sums]).to eq([ 10, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ])
         expect(result[category1.id][:total]).to eq(30)

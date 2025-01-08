@@ -1,10 +1,10 @@
 class Category < ApplicationRecord
   belongs_to :user
-  has_many :costs
+  has_many :transactions
   validates :name, :hex_color, presence: true
   validates :name, uniqueness: true
 
-  before_destroy :check_for_costs
+  before_destroy :check_for_transactions
 
 
   def self.ransackable_attributes(auth_object = nil)
@@ -13,9 +13,9 @@ class Category < ApplicationRecord
 
   private
 
-  def check_for_costs
-    if costs.exists?
-      errors.add(:base, "Cannot delete category with associated costs")
+  def check_for_transactions
+    if transactions.exists?
+      errors.add(:base, "Cannot delete category with associated transactions")
       throw(:abort)
     end
   end

@@ -1,0 +1,26 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="text-muted">
+       <%= link_to edit_mobile_transaction_path(transaction), class: 'link-underline link-underline-opacity-0 text-black' do %>
+        <%= transaction.fixed ? "Fixed transaction" : transaction.date %>
+       <%- end %>
+      </span>
+    </div>
+    <%= link_to edit_mobile_transaction_path(transaction), class: 'mb1 link-underline link-underline-opacity-0 text-black h5' do %>
+      <%= transaction.description %>
+    <%- end %>
+    <div class="d-flex justify-content-between">
+      <span class="fw-bold">
+        <%= link_to edit_mobile_transaction_path(transaction), class: 'link-underline link-underline-opacity-0 text-black' do %>
+        € <%= transaction.amount %>
+        <%- end %>
+      </span>
+      <%= link_to edit_mobile_category_path(transaction.category), class: '' do %>
+      <span class="badge" style="background: <%= transaction.category.hex_color.present? ? transaction.category.hex_color : "gray" %>">
+        <%= transaction.category.name %>
+      </span>
+      <%- end %>
+    </div>
+  </div>
+</div>

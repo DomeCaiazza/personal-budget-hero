@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      transaction:
+        one: Transaction
+        other: Transactions
+    attributes:
+      transaction:
+        description: Description
+        amount: Amount
+        date: Date
+        paid: Paid
+        fixed: Fixed
+        created_at: Created At
+        updated_at: Updated At
+        user_id: User
+        category_id: Category

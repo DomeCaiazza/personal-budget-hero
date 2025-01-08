@@ -1,0 +1,66 @@
+require 'rails_helper'
+require 'devise'
+
+RSpec.describe Transaction, type: :model do
+  let(:expense_transaction) { FactoryBot.create(:transaction) }
+  let(:income_transaction) { FactoryBot.create(:transaction, transaction_type: 'income') }
+
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should belong_to(:category) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:amount) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:date) }
+    it { should validate_presence_of(:category_id) }
+
+    it "has a valid expense_transaction factory" do
+      expect(expense_transaction).to be_valid
+    end
+
+    it "has a valid expense_transaction factory" do
+      expect(income_transaction).to be_valid
+    end
+
+    it "is invalid without an amount" do
+      expense_transaction.amount = nil
+      expect(expense_transaction).to be_invalid
+    end
+
+    it "is invalid without a description" do
+      expense_transaction.description = nil
+      expect(expense_transaction).to be_invalid
+    end
+
+    it "is invalid without a date" do
+      expense_transaction.date = nil
+      expect(expense_transaction).to be_invalid
+    end
+
+    it "is invalid without a category_id" do
+      expense_transaction.category_id = nil
+      expect(expense_transaction).to be_invalid
+    end
+
+    it "is invalid without a user_id" do
+      expense_transaction.user_id = nil
+      expect(expense_transaction).to be_invalid
+    end
+
+    it "is invalid with wrong transaction_type" do
+      expect { expense_transaction.transaction_type = 'wrong' }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe 'ransackable attributes/associations' do
+    it 'returns the correct attributes' do
+      expect(Transaction.ransackable_attributes).to match_array(%w[amount category_id created_at date description fixed id paid updated_at user_id category_name])
+    end
+
+    it 'returns the correct associations' do
+      expect(Transaction.ransackable_associations).to match_array(%w[category user])
+    end
+  end
+end

@@ -1,0 +1,29 @@
+<h5>Report</h5>
+<div class="row">
+  <div class="col-sm-3 form-group has-feedback">
+    <h6>Transactions</h6>
+    <table class="table table-bordered border-black">
+      <tbody>
+      <tr>
+        <td>Total:</td>
+        <td><%= @transactions_report[:total] %></td>
+      </tr>
+      <tr>
+        <td>Forecast:</td>
+        <td><%= @transactions_report[:forecast].present? ? @transactions_report[:forecast] : t("labels.not_available") %></td>
+      </tr>
+      <tr>
+        <td>Average:</td>
+        <td><%= @transactions_report[:average] %></td>
+      </tr>
+      <tr>
+        <td>Average without fixed transactions:</td>
+        <td><%= @transactions_report[:average_without_fixed_transactions] %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6 form-group has-feedback">
+  </div>
+</div>
+<hr>

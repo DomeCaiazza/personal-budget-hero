@@ -5,7 +5,7 @@ RSpec.describe Category, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
-    it { should have_many(:costs) }
+    it { should have_many(:transactions) }
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:hex_color) }
   end
@@ -31,16 +31,16 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'before destroy callback' do
-    it 'prevents deletion if there are associated costs' do
-      category_with_costs = FactoryBot.create(:category)
-      FactoryBot.create(:cost, category: category_with_costs)
-      expect { category_with_costs.destroy }.not_to change(Category, :count)
-      expect(category_with_costs.errors[:base]).to include("Cannot delete category with associated costs")
+    it 'prevents deletion if there are associated transactions' do
+      category_with_transactions = FactoryBot.create(:category)
+      FactoryBot.create(:transaction, category: category_with_transactions)
+      expect { category_with_transactions.destroy }.not_to change(Category, :count)
+      expect(category_with_transactions.errors[:base]).to include("Cannot delete category with associated transactions")
     end
 
-    it 'allows deletion if there are no associated costs' do
-      category_without_costs = FactoryBot.create(:category)
-      expect { category_without_costs.destroy }.to change(Category, :count).by(-1)
+    it 'allows deletion if there are no associated transactions' do
+      category_without_transactions = FactoryBot.create(:category)
+      expect { category_without_transactions.destroy }.to change(Category, :count).by(-1)
     end
   end
 

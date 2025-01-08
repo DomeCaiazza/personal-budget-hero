@@ -133,7 +133,7 @@ RSpec.describe Desktop::CategoriesController, type: :controller do
 
         context 'when the category cannot be destroyed' do
           it 'redirects to the categories path with an error message' do
-            create(:cost, category: category)
+            create(:transaction, category: category)
             delete :destroy, params: { id: category.id }
             expect(response).to redirect_to(desktop_categories_path)
             expect(flash[:danger]).to include(I18n.t("labels.error_record_destroyed"))
