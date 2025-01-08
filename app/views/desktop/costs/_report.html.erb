@@ -1,0 +1,29 @@
+<h5>Report</h5>
+<div class="row">
+  <div class="col-sm-3 form-group has-feedback">
+    <h6>Costs</h6>
+    <table class="table table-bordered border-black">
+      <tbody>
+      <tr>
+        <td>Total:</td>
+        <td><%= @costs_report[:total] %></td>
+      </tr>
+      <tr>
+        <td>Forecast:</td>
+        <td><%= @costs_report[:forecast].present? ? @costs_report[:forecast] : t("labels.not_available") %></td>
+      </tr>
+      <tr>
+        <td>Average:</td>
+        <td><%= @costs_report[:average] %></td>
+      </tr>
+      <tr>
+        <td>Average without fixed costs:</td>
+        <td><%= @costs_report[:average_without_fixed_costs] %></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-6 form-group has-feedback">
+  </div>
+</div>
+<hr>

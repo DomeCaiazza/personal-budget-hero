@@ -1,16 +1,16 @@
 class CostReportService
   def initialize(costs, start_date, end_date)
     @costs = costs
-    @start_date = start_date
-    @end_date = end_date
+    @start_date = DateTime.parse(start_date)
+    @end_date = DateTime.parse(end_date)
   end
 
   def generate
     {
-      total: total,
-      average: average,
-      average_without_fixed_costs: average_without_fixed_costs,
-      costs_forecast: remaining_days.positive? ? costs_forecast : nil
+      total: total.to_f,
+      average: average.to_f,
+      average_without_fixed_costs: average_without_fixed_costs.to_f,
+      forecast: remaining_days.positive? ? forecast.to_f : nil
     }
   end
 
@@ -28,7 +28,7 @@ class CostReportService
     @costs.where(fixed: false).sum(:amount) / total_days
   end
 
-  def costs_forecast
+  def forecast
     total + (average_without_fixed_costs * remaining_days)
   end
 
@@ -43,5 +43,4 @@ class CostReportService
   def spent_days
     (total_days - remaining_days)
   end
-
 end

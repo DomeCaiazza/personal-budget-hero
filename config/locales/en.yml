@@ -146,6 +146,7 @@ en:
     admin: Admin
     save_draft: Save as Draft
     rescue_value: "-"
+    not_available: "Not available"
   helpers:
     select:
       prompt: No selection

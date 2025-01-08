@@ -7,6 +7,7 @@ class Desktop::CostsController < DesktopController
     params[:q] ||= { date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month }
     @q = current_user.costs.ransack(params[:q])
     @costs = @q.result
+    # @costs_report = CostReportService.new(@costs, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate
     authorize(@costs)
   end
 
