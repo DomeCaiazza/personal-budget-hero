@@ -54,6 +54,22 @@ RSpec.describe Transaction, type: :model do
     end
   end
 
+  describe 'scopes' do
+    it "returns only expense transactions" do
+      expense_transaction = FactoryBot.create(:transaction, transaction_type: :expense)
+      income_transaction = FactoryBot.create(:transaction, transaction_type: :income)
+      expect(Transaction.expenses).to include(expense_transaction)
+      expect(Transaction.expenses).not_to include(income_transaction)
+    end
+
+    it "returns only income transactions" do
+      expense_transaction = FactoryBot.create(:transaction, transaction_type: :expense)
+      income_transaction = FactoryBot.create(:transaction, transaction_type: :income)
+      expect(Transaction.incomes).to include(income_transaction)
+      expect(Transaction.incomes).not_to include(expense_transaction)
+    end
+  end
+
   describe 'ransackable attributes/associations' do
     it 'returns the correct attributes' do
       expect(Transaction.ransackable_attributes).to match_array(%w[amount category_id created_at date description fixed id paid updated_at user_id category_name])

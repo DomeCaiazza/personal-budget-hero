@@ -6,8 +6,8 @@
       <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Find by description' %>
     </div>
     <div class="col-sm-3 form-group has-feedback">
-      <%= f.label :name_cont, Category.human_attribute_name(:name), class: 'control-label' %>
-      <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Find by description' %>
+      <%= f.label :category_name_cont, Category.human_attribute_name(:name), class: 'control-label' %>
+      <%= f.search_field :category_name_cont, class: 'form-control', placeholder: 'Find by description' %>
     </div>
     <div class="col-sm-3 form-group has-feedback">
       <%= f.label :date_gteq, 'Start Date', class: 'control-label' %>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-6 form-group has-feedback">
       <%= f.label :date_eq, 'Year', class: 'control-label' %>
-      <%= f.select :date_eq, options_for_select((2024..Date.today.year).to_a.reverse), {}, class: 'form-control' %>
+      <%= f.select :date_eq, options_for_select(((current_user.transactions&.first&.date&.year || Date.today.year)..Date.today.year).to_a.reverse), {}, class: 'form-control' %>
     </div>
     <div class="col-sm-3 form-group has-feedback">
 

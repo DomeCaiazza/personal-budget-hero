@@ -7,7 +7,7 @@ class Desktop::TransactionsController < DesktopController
     params[:q] ||= { date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month }
     @q = current_user.transactions.ransack(params[:q])
     @transactions = @q.result
-    # @transactions_report = TransactionReportService.new(@transactions, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate
+    @transactions_report = TransactionReportService.new(@transactions, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate
     authorize(@transactions)
   end
 
