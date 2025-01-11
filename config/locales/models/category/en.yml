@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      category:
+        one: Category
+        other: Categories
+    attributes:
+      category:
+        name: Name
+        hex_color: Color
+        category_type: Type

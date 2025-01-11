@@ -72,11 +72,37 @@ RSpec.describe Transaction, type: :model do
 
   describe 'ransackable attributes/associations' do
     it 'returns the correct attributes' do
-      expect(Transaction.ransackable_attributes).to match_array(%w[amount category_id created_at date description fixed id paid updated_at user_id category_name])
+      expect(Transaction.ransackable_attributes).to match_array(%w[amount category_id created_at date description id paid updated_at user_id category_name])
     end
 
     it 'returns the correct associations' do
       expect(Transaction.ransackable_associations).to match_array(%w[category user])
+    end
+  end
+
+  describe 'before_save' do
+    it "sets a positive amount to negative for expense transactions" do
+      transaction = FactoryBot.build(:transaction, transaction_type: 'expense', amount: 100, category: FactoryBot.create(:category))
+      transaction.save
+      expect(transaction.amount).to eq(-100.to_d)
+    end
+
+    it "keeps a negative amount for expense transactions" do
+      transaction = FactoryBot.build(:transaction, transaction_type: 'expense', amount: -100)
+      transaction.save
+      expect(transaction.amount).to eq(-100)
+    end
+
+    it "sets a negative amount to positive for income transactions" do
+      transaction = FactoryBot.build(:transaction, transaction_type: 'income', amount: -100, category: FactoryBot.create(:category))
+      transaction.save
+      expect(transaction.amount).to eq(100)
+    end
+
+    it "keeps a positive amount for income transactions" do
+      transaction = FactoryBot.build(:transaction, transaction_type: 'income', amount: 100)
+      transaction.save
+      expect(transaction.amount).to eq(100)
     end
   end
 end

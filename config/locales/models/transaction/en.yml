@@ -11,7 +11,14 @@ en:
         date: Date
         paid: Paid
         fixed: Fixed
+        transaction_type: Type
         created_at: Created At
         updated_at: Updated At
         user_id: User
         category_id: Category
+    labels:
+        transaction:
+            income: Income
+            expense: Expense
+            new_income: Add new income
+            new_expense: Add new expense

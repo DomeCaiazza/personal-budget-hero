@@ -48,6 +48,7 @@
       </div>
 
       <div class="mb-1 col-sm-offset-2 text-end">
+        <%= f.hidden_field :transaction_type, value: @transaction_type %>
         <%= f.submit 'Save', class: 'btn btn-primary btn-lg' %>
       </div>
     </div>

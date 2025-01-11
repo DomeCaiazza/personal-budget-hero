@@ -60,12 +60,16 @@
                     required: true %>
   </div>
   <div class="mb-3">
-    <%= f.label :fixed, t('activerecord.attributes.transaction.fixed'), class: 'form-label' %>
-    <%= f.check_box :fixed,
-                    class: 'form-check-input'
-    %>
+    <%= f.label :transaction_type, t('activerecord.attributes.transaction.transaction_type'), class: 'form-label' %>
+    <div>
+      <%= f.radio_button :transaction_type, 'expense', class: 'form-check-input', required: true %>
+      <%= f.label :transaction_type_expense, t('activerecord.labels.transaction.expense'), class: 'form-check-label' %>
+    </div>
+    <div>
+      <%= f.radio_button :transaction_type, 'income', class: 'form-check-input', required: true %>
+      <%= f.label :transaction_type_income, t('activerecord.labels.transaction.income'), class: 'form-check-label' %>
+    </div>
   </div>
-
   <div class="mb-3">
     <%= f.submit @transaction.new_record? ? t('labels.save') : t('labels.update'), class: "btn btn-primary" %>
   </div>

@@ -20,7 +20,19 @@
     <%= f.color_field :hex_color,
                       class: "form-control form-control-color",
                       style: "width: 3rem; padding: 0;",
-                      value: ['#16a085', '#2980b9', '#8e44ad', '#d35400', '#c0392b', '#2c3e50', '#f39c12'].sample %>
+                      value: f.object.hex_color || Faker::Color.hex_color %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :category_type, t('activerecord.attributes.category.category_type'), class: 'form-label' %>
+    <div>
+      <%= f.radio_button :category_type, 'expenses', class: 'form-check-input', required: true %>
+      <%= f.label :category_type_expense, t('labels.expenses'), class: 'form-check-label' %>
+    </div>
+    <div>
+      <%= f.radio_button :category_type, 'incomes', class: 'form-check-input', required: true %>
+      <%= f.label :category_type_income, t('labels.incomes'), class: 'form-check-label' %>
+    </div>
   </div>
 
   <div class="mb-3">

@@ -25,7 +25,7 @@ class TransactionReportService
   end
 
   def average_without_fixed_transactions
-    @transactions.where(fixed: false).sum(:amount) / total_days
+    @transactions.expenses.sum(:amount) / total_days
   end
 
   def forecast

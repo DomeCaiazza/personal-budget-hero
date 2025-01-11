@@ -44,7 +44,7 @@
     private
 
     def category_params
-      params.require(:category).permit(:name, :hex_color)
+      params.require(:category).permit(:name, :hex_color, :category_type)
     end
 
     def set_category

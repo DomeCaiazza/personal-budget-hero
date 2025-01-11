@@ -1,6 +1,7 @@
 class Mobile::TransactionsController < MobileController
   before_action :set_transaction, only: [ :edit, :update ]
   before_action :set_categories, only: [ :edit, :new ]
+
   def index
     policy_scope(Transaction)
     @transactions = current_user.transactions.order(id: :desc)
@@ -9,6 +10,7 @@ class Mobile::TransactionsController < MobileController
 
   def new
     @transaction = policy_scope(Transaction).new
+    @transaction_type = params[:transaction_type] if Transaction.transaction_types.keys.include?(params[:transaction_type])
     authorize @transaction
   end
 
@@ -41,7 +43,7 @@ class Mobile::TransactionsController < MobileController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:description, :date, :amount, :category_id)
+    params.require(:transaction).permit(:description, :date, :amount, :category_id, :transaction_type)
   end
 
   def set_transaction
@@ -49,6 +51,10 @@ class Mobile::TransactionsController < MobileController
   end
 
   def set_categories
-    @categories = current_user.categories
+    @categories = if params[:transaction_type].present?
+                    current_user.categories.send(params[:transaction_type])
+    else
+                    current_user.categories
+    end
   end
 end

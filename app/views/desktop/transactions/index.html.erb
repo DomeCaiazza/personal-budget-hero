@@ -1,6 +1,7 @@
 <h2>Transactions</h2>
 <div class="text-end">
-  <%= link_to t('labels.new'), new_desktop_transaction_path, class: 'btn btn-sm btn-primary' %>
+    <%= link_to t('activerecord.labels.transaction.new_income'), new_desktop_transaction_path(transaction_type: 'income'), class: 'btn btn-sm btn-success' %>
+    <%= link_to t('activerecord.labels.transaction.new_expense'), new_desktop_transaction_path(transaction_type: 'expense'), class: 'btn btn-sm btn-danger' %>
 </div>
 
 <%= render 'desktop/transactions/filters' %>
@@ -14,7 +15,6 @@
       <th scope="col">Category</th>
       <th scope="col">Amount</th>
       <th scope="col">Paid</th>
-      <th scope="col">Fixed</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>

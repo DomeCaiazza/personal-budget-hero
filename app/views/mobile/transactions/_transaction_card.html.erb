@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center mb-2">
       <span class="text-muted">
        <%= link_to edit_mobile_transaction_path(transaction), class: 'link-underline link-underline-opacity-0 text-black' do %>
-        <%= transaction.fixed ? "Fixed transaction" : transaction.date %>
+        <%= transaction.date %>
        <%- end %>
       </span>
     </div>

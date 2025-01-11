@@ -13,6 +13,7 @@ class Desktop::TransactionsController < DesktopController
 
   def new
     policy_scope(Transaction)
+    @transaction_type = params[:transaction_type] if Transaction.transaction_types.keys.include?(params[:transaction_type])
     @transaction = current_user.transactions.build
     authorize @transaction
   end
@@ -60,11 +61,15 @@ class Desktop::TransactionsController < DesktopController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:description, :date, :amount, :category_id)
+    params.require(:transaction).permit(:description, :date, :amount, :category_id, :transaction_type)
   end
 
   def set_categories
     policy_scope(Category)
-    @categories = current_user.categories
+    @categories = if params[:transaction_type].present?
+                    current_user.categories.send(params[:transaction_type])
+    else
+                    current_user.categories
+    end
   end
 end

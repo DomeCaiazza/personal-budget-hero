@@ -147,6 +147,10 @@ en:
     save_draft: Save as Draft
     rescue_value: "-"
     not_available: "Not available"
+    expense: expense
+    income: income
+    expenses: Expenses
+    incomes: Incomes
   helpers:
     select:
       prompt: No selection
