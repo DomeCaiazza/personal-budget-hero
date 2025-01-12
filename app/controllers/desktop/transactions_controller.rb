@@ -1,4 +1,5 @@
 class Desktop::TransactionsController < DesktopController
+  include TransactionsConcern
   before_action :set_transaction, only: [ :edit, :update, :destroy ]
   before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
 
@@ -29,10 +30,6 @@ class Desktop::TransactionsController < DesktopController
     end
   end
 
-  def edit
-    authorize @transaction
-  end
-
   def update
     authorize @transaction
     if @transaction.update(transaction_params)
@@ -51,25 +48,5 @@ class Desktop::TransactionsController < DesktopController
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@transaction.errors.full_messages.join(". ")}"
     end
     redirect_to desktop_transactions_path
-  end
-
-  private
-
-  def set_transaction
-    policy_scope(Transaction)
-    @transaction = current_user.transactions.find(params[:id])
-  end
-
-  def transaction_params
-    params.require(:transaction).permit(:description, :date, :amount, :category_id, :transaction_type)
-  end
-
-  def set_categories
-    policy_scope(Category)
-    @categories = if params[:transaction_type].present?
-                    current_user.categories.send(params[:transaction_type])
-    else
-                    current_user.categories
-    end
   end
 end

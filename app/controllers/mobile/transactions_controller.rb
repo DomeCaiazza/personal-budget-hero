@@ -1,4 +1,5 @@
 class Mobile::TransactionsController < MobileController
+  include TransactionsConcern
   before_action :set_transaction, only: [ :edit, :update ]
   before_action :set_categories, only: [ :edit, :new ]
 
@@ -11,10 +12,6 @@ class Mobile::TransactionsController < MobileController
   def new
     @transaction = policy_scope(Transaction).new
     @transaction_type = params[:transaction_type] if Transaction.transaction_types.keys.include?(params[:transaction_type])
-    authorize @transaction
-  end
-
-  def edit
     authorize @transaction
   end
 
@@ -37,24 +34,6 @@ class Mobile::TransactionsController < MobileController
       redirect_to mobile_transactions_path, notice: t("labels.record_modified")
     else
       render :edit
-    end
-  end
-
-  private
-
-  def transaction_params
-    params.require(:transaction).permit(:description, :date, :amount, :category_id, :transaction_type)
-  end
-
-  def set_transaction
-    @transaction = policy_scope(Transaction).find(params[:id])
-  end
-
-  def set_categories
-    @categories = if params[:transaction_type].present?
-                    current_user.categories.send(params[:transaction_type])
-    else
-                    current_user.categories
     end
   end
 end

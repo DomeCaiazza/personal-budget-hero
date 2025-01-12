@@ -80,6 +80,29 @@ RSpec.describe Mobile::TransactionsController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
+
+    context '#set_category' do
+      it 'creates a new income transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'income')
+                                                 .merge(category_id: create(:category, category_type: 'incomes').id) }
+        }.to change(Transaction.incomes, :count).by(1)
+      end
+
+      it 'creates a new income transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'expense')
+                                                 .merge(category_id: create(:category, category_type: 'expenses').id) }
+        }.to change(Transaction.expenses, :count).by(1)
+      end
+
+      it 'does not create a new transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'expense')
+                                                 .merge(category_id: create(:category, category_type: 'invalid').id) }
+        }.to raise_error(ArgumentError)
+      end
+    end
   end
 
   describe 'PATCH #update' do

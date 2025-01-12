@@ -3,10 +3,13 @@ require 'rails_helper'
 RSpec.describe Desktop::TransactionsController, type: :controller do
   let(:user) { create(:user) }
   let(:transaction) { create(:transaction, user: user) }
+  let(:categories) { double('categories') }
 
   before do
     Rails.application.routes_reloader.execute_unless_loaded
     sign_in(user)
+    allow(controller).to receive(:current_user).and_return(user)
+    allow(user).to receive(:categories).and_return(categories)
   end
 
   describe 'GET #index' do
@@ -78,6 +81,29 @@ RSpec.describe Desktop::TransactionsController, type: :controller do
       it 'renders the new template' do
         post :create, params: { transaction: attributes_for(:transaction, description: nil) }
         expect(response).to render_template(:new)
+      end
+    end
+
+    context '#set_category' do
+      it 'creates a new income transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'income')
+                                                 .merge(category_id: create(:category, category_type: 'incomes').id) }
+        }.to change(Transaction.incomes, :count).by(1)
+      end
+
+      it 'creates a new income transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'expense')
+                                                 .merge(category_id: create(:category, category_type: 'expenses').id) }
+        }.to change(Transaction.expenses, :count).by(1)
+      end
+
+      it 'does not create a new transaction with correct category type' do
+        expect {
+          post :create, params: { transaction: attributes_for(:transaction, transaction_type: 'expense')
+                                                 .merge(category_id: create(:category, category_type: 'invalid').id) }
+        }.to raise_error(ArgumentError)
       end
     end
   end
