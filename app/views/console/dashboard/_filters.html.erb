@@ -1,0 +1,16 @@
+<h5>Search</h5>
+<%= search_form_for @q, url: console_dashboard_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
+  <div class="row">
+    <div class="col-sm-6 form-group has-feedback">
+      <%= f.label :date_eq, 'Year', class: 'control-label' %>
+      <%= f.select :date_eq, options_for_select(((current_user.transactions&.first&.date&.year || Date.today.year)..Date.today.year).to_a.reverse), {}, class: 'form-control' %>
+    </div>
+    <div class="col-sm-3 form-group has-feedback">
+
+    </div>
+  </div>
+  <br>
+  <%= f.submit 'Search', class: 'btn btn-outline-primary' %>
+  <%= link_to 'Cancel', request.path, class: 'btn btn-white' %>
+<% end %>
+<hr>

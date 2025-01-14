@@ -1,0 +1,5 @@
+<h2>Edit <%= @transaction.transaction_type.capitalize %></h2>
+
+<%= render 'form', transaction: @transaction %>
+
+<%= link_to 'Indietro', console_transactions_path %>

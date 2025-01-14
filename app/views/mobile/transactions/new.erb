@@ -1,8 +1,0 @@
-<div class="container my-3">
-  <p class="h2">  <%= link_to '<', mobile_transactions_path, class: 'btn btn-outline-secondary' %>
-    New <%= @transaction_type.present? ? t("activerecord.labels.transaction.#{@transaction_type}") :
-              t("activerecord.models.transaction.one") %></p>
-</div>
-<div class="container my-3">
-  <%= render 'form' %>
-</div>

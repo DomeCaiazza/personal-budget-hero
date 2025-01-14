@@ -1,0 +1,30 @@
+<h5>Search</h5>
+<%= search_form_for @q, url: console_transactions_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
+  <div class="row">
+    <div class="col-sm-3 form-group has-feedback">
+      <%= f.label :description_cont, Transaction.human_attribute_name(:description), class: 'control-label' %>
+      <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Find by description' %>
+    </div>
+    <div class="col-sm-3 form-group has-feedback">
+      <%= f.label :category_name_cont, Category.human_attribute_name(:name), class: 'control-label' %>
+      <%= f.search_field :category_name_cont, class: 'form-control', placeholder: 'Find by description' %>
+    </div>
+    <div class="col-sm-3 form-group has-feedback">
+      <%= f.label :date_gteq, 'Start Date', class: 'control-label' %>
+      <%= f.date_field :date_gteq, class: 'form-control', placeholder: 'Start Date' %>
+    </div>
+    <div class="col-sm-3 form-group has-feedback">
+      <%= f.label :date_lteq, 'End Date', class: 'control-label' %>
+      <%= f.date_field :date_lteq, class: 'form-control', placeholder: 'End Date' %>
+      <div class="text-end">
+        <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="all" class="btn btn-sm btn-secondary mt-2 text-end">All</button>
+        <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="last-month" class="btn btn-sm btn-secondary mt-2 text-end">Last month</button>
+        <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="this-month" class="btn btn-sm btn-secondary mt-2 text-end">This month</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <%= f.submit 'Search', class: 'btn btn-outline-primary' %>
+  <%= link_to 'Cancel', request.path, class: 'btn btn-white' %>
+<% end %>
+<hr>

@@ -1,0 +1,25 @@
+<h2>Transactions</h2>
+<div class="text-end">
+    <%= link_to t('activerecord.labels.transaction.new_income'), new_console_transaction_path(transaction_type: 'income'), class: 'btn btn-sm btn-success' %>
+    <%= link_to t('activerecord.labels.transaction.new_expense'), new_console_transaction_path(transaction_type: 'expense'), class: 'btn btn-sm btn-danger' %>
+</div>
+
+<%= render 'desktop/transactions/filters' %>
+<%= render 'desktop/transactions/report' %>
+<div class="table-responsive small">
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Paid</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: 'desktop/transactions/transaction', collection: @transactions, as: :transaction %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,6 @@
+<h2>New <%= @transaction_type.present? ? t("activerecord.labels.transaction.#{@transaction_type}") :
+              t("activerecord.models.transaction.one") %></h2>
+
+<%= render 'form', category: @transaction %>
+
+<%= link_to 'Indietro', console_transactions_path %>
