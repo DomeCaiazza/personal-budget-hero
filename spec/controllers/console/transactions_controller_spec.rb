@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Desktop::TransactionsController, type: :controller do
+RSpec.describe Console::TransactionsController, type: :controller do
   let(:user) { create(:user) }
   let(:transaction) { create(:transaction, user: user) }
   let(:categories) { double('categories') }

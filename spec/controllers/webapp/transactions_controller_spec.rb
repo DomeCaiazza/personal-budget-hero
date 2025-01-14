@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Mobile::TransactionsController, type: :controller do
+RSpec.describe Webapp::TransactionsController, type: :controller do
   let(:user) { create(:user) }
 
   before do

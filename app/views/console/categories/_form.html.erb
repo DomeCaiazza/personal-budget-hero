@@ -1,4 +1,4 @@
-<%= form_for [:desktop, @category], class: 'mb-4' do |f| %>
+<%= form_for [:console, @category], class: 'mb-4' do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@category.errors.count, "error") %>:</h2>

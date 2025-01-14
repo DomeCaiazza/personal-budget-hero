@@ -1,4 +1,4 @@
-class Desktop::CategoriesController < DesktopController
+class Console::CategoriesController < ConsoleController
   include CategoriesConcern
   before_action :set_category, only: [ :edit, :update, :destroy ]
 

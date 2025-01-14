@@ -1,46 +1,59 @@
 class TransactionReportService
-  def initialize(transactions, start_date, end_date)
-    @transactions = transactions
+  def initialize(transactions, start_date, end_date, today = DateTime.now)
+    @expenses = transactions.expenses
+    @incomes = transactions.incomes
     @start_date = DateTime.parse(start_date)
     @end_date = DateTime.parse(end_date)
+    @today = today
   end
 
   def generate
     {
-      total: total.to_f,
-      average: average.to_f,
-      average_without_fixed_transactions: average_without_fixed_transactions.to_f,
-      forecast: remaining_days.positive? ? forecast.to_f : nil
+      total_expenses: total_expenses,
+      total_incomes: total_incomes,
+      saved: saved,
+      expenses_average_as_of_today: expenses_average_as_of_today,
+      expenses_without_subscriptions_average: nil,
+      expenses_forecast: expenses_forecast,
+      total_days: total_days,
+      passed_days: passed_days,
+      remaining_days: remaining_days
     }
   end
 
-  private
-
-  def total
-    @transactions.sum(:amount)
+  def total_expenses
+    @expenses.sum(:amount)
   end
 
-  def average
-    total / spent_days
+  def total_incomes
+    @incomes.sum(:amount)
   end
 
-  def average_without_fixed_transactions
-    @transactions.expenses.sum(:amount) / total_days
+  def saved
+    total_incomes + total_expenses
   end
 
-  def forecast
-    total + (average_without_fixed_transactions * remaining_days)
+  def expenses_average_as_of_today
+    return total_expenses / total_days if @end_date <= @today
+
+    total_expenses / passed_days
   end
 
-  def remaining_days
-    (@end_date - Date.today).to_i
+  def expenses_forecast
+    return nil if @end_date <= @today
+
+    total_expenses + (expenses_average_as_of_today * remaining_days)
   end
 
   def total_days
     (@end_date - @start_date).to_i + 1
   end
 
-  def spent_days
-    (total_days - remaining_days)
+  def passed_days
+    (@today - @start_date).to_i + 1
+  end
+
+  def remaining_days
+    total_days - passed_days
   end
 end

@@ -1,4 +1,4 @@
-class Desktop::DashboardController < DesktopController
+class Console::DashboardController < ConsoleController
   def index
     policy_scope(Transaction)
     @categories = current_user.categories

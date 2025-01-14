@@ -4,8 +4,8 @@
     <%= link_to t('activerecord.labels.transaction.new_expense'), new_console_transaction_path(transaction_type: 'expense'), class: 'btn btn-sm btn-danger' %>
 </div>
 
-<%= render 'desktop/transactions/filters' %>
-<%= render 'desktop/transactions/report' %>
+<%= render 'console/transactions/filters' %>
+<%= render 'console/transactions/report' %>
 <div class="table-responsive small">
   <table class="table table-sm">
     <thead>
@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    <%= render partial: 'desktop/transactions/transaction', collection: @transactions, as: :transaction %>
+    <%= render partial: 'console/transactions/transaction', collection: @transactions, as: :transaction %>
     </tbody>
   </table>
 </div>

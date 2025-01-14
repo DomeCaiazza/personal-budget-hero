@@ -1,4 +1,4 @@
-class Mobile::TransactionsController < MobileController
+class Webapp::TransactionsController < WebappController
   include TransactionsConcern
   before_action :set_transaction, only: [ :edit, :update ]
   before_action :set_categories, only: [ :edit, :new ]
@@ -21,7 +21,7 @@ class Mobile::TransactionsController < MobileController
     authorize @transaction
     if @transaction.save
       flash[:success] = t("labels.record_created")
-      redirect_to new_mobile_transaction_path, success: t("labels.record_created")
+      redirect_to new_webapp_transaction_path, success: t("labels.record_created")
     else
       flash[:danger] = @transaction.errors.full_messages.join("<br>").html_safe
       render :new, status: :unprocessable_entity
@@ -31,7 +31,7 @@ class Mobile::TransactionsController < MobileController
   def update
     authorize @transaction
     if @transaction.update(transaction_params)
-      redirect_to mobile_transactions_path, notice: t("labels.record_modified")
+      redirect_to webapp_transactions_path, notice: t("labels.record_modified")
     else
       render :edit
     end

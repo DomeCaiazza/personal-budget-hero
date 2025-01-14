@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Mobile::CategoriesController, type: :controller do
+RSpec.describe Webapp::CategoriesController, type: :controller do
   let(:user) { create(:user) }
   let(:category) { create(:category, user: user) }
 

@@ -12,17 +12,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   authenticate :user do
-    namespace :mobile, module: :mobile do
+    namespace :webapp, module: :webapp do
       resources :transactions
       resources :categories
     end
 
-    namespace :desktop, module: :desktop do
+    namespace :console, module: :console do
       get "dashboard", to: "dashboard#index"
       resources :categories
       resources :transactions
     end
   end
 
-  root "mobile/transactions#index"
+  root "console/dashboard#index"
 end

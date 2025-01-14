@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Desktop::DashboardController, type: :controller do
+RSpec.describe Console::DashboardController, type: :controller do
   let(:user) { create(:user) }
 
   before do

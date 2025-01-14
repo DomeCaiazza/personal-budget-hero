@@ -1,4 +1,4 @@
-class Desktop::TransactionsController < DesktopController
+class Console::TransactionsController < ConsoleController
   include TransactionsConcern
   before_action :set_transaction, only: [ :edit, :update, :destroy ]
   before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]

@@ -3,11 +3,11 @@
   <% if @categories.any? %>
     <% if @categories.expenses.any? %>
       <h4>Expenses</h4>
-      <%= render partial: 'mobile/categories/category_card', collection: @categories.expenses, as: :category %>
+      <%= render partial: 'webapp/categories/category_card', collection: @categories.expenses, as: :category %>
     <% end %>
     <% if @categories.incomes.any? %>
       <h4>Incomes</h4>
-      <%= render partial: 'mobile/categories/category_card', collection: @categories.incomes, as: :category %>
+      <%= render partial: 'webapp/categories/category_card', collection: @categories.incomes, as: :category %>
     <% end %>
   <% else %>
     <div class="alert alert-info" role="alert">

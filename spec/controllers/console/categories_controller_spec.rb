@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Desktop::CategoriesController, type: :controller do
+RSpec.describe Console::CategoriesController, type: :controller do
   let(:user) { create(:user) }
   let(:category) { create(:category, user: user) }
 

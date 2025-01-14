@@ -14,7 +14,7 @@
 </div>
 <div class="container my-3">
   <% if @transactions.any? %>
-    <%= render partial: 'mobile/transactions/transaction_card', collection: @transactions, as: :transaction %>
+    <%= render partial: 'webapp/transactions/transaction_card', collection: @transactions, as: :transaction %>
   <% else %>
     <div class="alert alert-info" role="alert">
       <%= t('labels.no_transactions') %>
