@@ -151,6 +151,11 @@ en:
     income: income
     expenses: Expenses
     incomes: Incomes
+    monthly: Monthly
+    annual: Annual
+    semiannual: Semi-Annual
+    quarterly: Quarterly
+    subscriptions_applied: Subscriptions Applied
   helpers:
     select:
       prompt: No selection

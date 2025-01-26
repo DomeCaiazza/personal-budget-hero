@@ -1,0 +1,20 @@
+<h2>Subscriptions</h2>
+<div class="text-end">
+  <%= link_to t('labels.new'), new_console_subscription_path, class: 'btn btn-sm btn-primary' %>
+</div>
+
+<div class="table-responsive small">
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col"><%= t('activerecord.attributes.subscription.description') %></th>
+      <th scope="col"><%= t('activerecord.attributes.subscription.default_amount') %></th>
+      <th scope="col"><%= t('activerecord.attributes.subscription.subscription_type') %></th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: 'console/subscriptions/subscription', collection: @subscriptions, as: :subscription %>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 <h2>Transactions</h2>
 <div class="text-end">
-    <%= link_to t('activerecord.labels.transaction.new_income'), new_console_transaction_path(transaction_type: 'income'), class: 'btn btn-sm btn-success' %>
+  <%= link_to t('activerecord.labels.transaction.apply_subscriptions'), console_transactions_path(apply_subscriptions: true), class: 'btn btn-sm btn-secondary' %>
+  <%= link_to t('activerecord.labels.transaction.new_income'), new_console_transaction_path(transaction_type: 'income'), class: 'btn btn-sm btn-success' %>
     <%= link_to t('activerecord.labels.transaction.new_expense'), new_console_transaction_path(transaction_type: 'expense'), class: 'btn btn-sm btn-danger' %>
 </div>
 

@@ -25,6 +25,14 @@
     </ul>
     <ul class="nav flex-column mb-2">
       <li class="nav-item">
+        <%= link_to console_subscriptions_path, class: 'nav-link' do %>
+          <i class="fe fe-star"></i>
+          Subscriptions
+        <% end %>
+      </li>
+    </ul>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
         <%= link_to console_categories_path, class: 'nav-link' do %>
           <i class="fe fe-list-bullet"></i>
           Categories

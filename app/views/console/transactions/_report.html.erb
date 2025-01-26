@@ -1,32 +1,31 @@
 <h5>Report</h5>
 <div class="row">
-  <div class="col-sm-3 form-group has-feedback">
-    <h6>Transactions</h6>
+  <div class="col-sm-12 form-group has-feedback">
     <table class="table table-bordered border-black">
       <tbody>
       <tr>
         <td>Total expenses:</td>
-        <td><%= @transactions_report[:total_expenses].round(2) %></td>
+        <td><%= currency_formatter(@transactions_report[:total_expenses])%></td>
         <td>Total incomes:</td>
-        <td><%= @transactions_report[:total_incomes].round(2) %></td>
+        <td><%= currency_formatter(@transactions_report[:total_incomes])%></td>
         <td>Saved:</td>
-        <td><%= @transactions_report[:saved].round(2) %></td>
+        <td><%= currency_formatter(@transactions_report[:saved]) %></td>
       </tr>
       <tr>
         <td>Expenses average as of today:</td>
-        <td><%= @transactions_report[:expenses_average_as_of_today].round(2) %></td>
-        <td>Expenses without subscriptions average:</td>
-        <td><%= @transactions_report[:expenses_without_subscriptions_average]&.round(2) || "-" %></td>
+        <td><%= currency_formatter(@transactions_report[:expenses_average_as_of_today]) %></td>
+        <td>Expenses without subscriptions average as of today:</td>
+        <td><%= currency_formatter(@transactions_report[:expenses_without_subscriptions_average_as_of_today]) %></td>
         <td>Expenses forecast:</td>
-        <td><%= @transactions_report[:expenses_forecast].round(2) %></td>
+        <td><%= currency_formatter(@transactions_report[:expenses_forecast]) %></td>
       </tr>
       <tr>
         <td>Total days:</td>
         <td><%= @transactions_report[:total_days].to_i %></td>
         <td>Passed days:</td>
         <td><%= @transactions_report[:passed_days].to_i %></td>
-        <td>Remaining days:</td>
-        <td><%= @transactions_report[:remaining_days].to_i %></td>
+        <td>Saving forecast:</td>
+        <td><%= currency_formatter(@transactions_report[:expenses_forecast]) %></td>
       </tr>
       </tbody>
     </table>

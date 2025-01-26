@@ -1,4 +1,4 @@
-class CategoryPolicy < ApplicationPolicy
+class SubscriptionPolicy < ApplicationPolicy
   class Scope < Scope
     def initialize(user, scope)
       @user  = user
@@ -17,13 +17,10 @@ class CategoryPolicy < ApplicationPolicy
     user_has_admin_or_user_privileges?
   end
 
-  def edit?
-    user_has_admin_or_user_privileges? && record.category_type != "subscriptions"
-  end
-
   alias new? index?
   alias create? index?
   alias update? index?
+  alias edit? index?
   alias destroy? index?
   alias generate_slug? index?
 end

@@ -62,11 +62,11 @@
   <div class="mb-3">
     <%= f.label :transaction_type, t('activerecord.attributes.transaction.transaction_type'), class: 'form-label' %>
     <div>
-      <%= f.radio_button :transaction_type, 'expense', class: 'form-check-input', required: true, checked: params[:transaction_type] == "expense" %>
+      <%= f.radio_button :transaction_type, 'expense', class: 'form-check-input', required: true, checked: params[:transaction_type] == "expense" || f.object.transaction_type == "expense"  %>
       <%= f.label :transaction_type_expense, t('activerecord.labels.transaction.expense'), class: 'form-check-label' %>
     </div>
     <div>
-      <%= f.radio_button :transaction_type, 'income', class: 'form-check-input', required: true, checked: params[:transaction_type] == "income" %>
+      <%= f.radio_button :transaction_type, 'income', class: 'form-check-input', required: true, checked: params[:transaction_type] == "income" || f.object.transaction_type == "income" %>
       <%= f.label :transaction_type_income, t('activerecord.labels.transaction.income'), class: 'form-check-label' %>
     </div>
   </div>

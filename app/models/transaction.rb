@@ -4,8 +4,7 @@ class Transaction < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
-  validates :transaction_type, presence: true
-  validates :amount, :description, :date, :category_id, presence: true
+  validates :amount, :description, :date, :category_id, :transaction_type, presence: true
   scope :expenses, -> { where(transaction_type: :expense) }
   scope :incomes, -> { where(transaction_type: :income) }
 

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get "dashboard", to: "dashboard#index"
       resources :categories
       resources :transactions
+      resources :subscriptions
     end
   end
 

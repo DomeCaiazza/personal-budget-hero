@@ -13,8 +13,9 @@ class TransactionReportService
       total_incomes: total_incomes,
       saved: saved,
       expenses_average_as_of_today: expenses_average_as_of_today,
-      expenses_without_subscriptions_average: nil,
+      expenses_without_subscriptions_average_as_of_today: expenses_without_subscriptions_average_as_of_today,
       expenses_forecast: expenses_forecast,
+      savings_forecast: savings_forecast,
       total_days: total_days,
       passed_days: passed_days,
       remaining_days: remaining_days
@@ -23,6 +24,10 @@ class TransactionReportService
 
   def total_expenses
     @expenses.sum(:amount)
+  end
+
+  def total_expenses_without_subscriptions
+    @expenses.where(subscription_code: nil).sum(:amount)
   end
 
   def total_incomes
@@ -39,10 +44,22 @@ class TransactionReportService
     total_expenses / passed_days
   end
 
+  def expenses_without_subscriptions_average_as_of_today
+    return total_expenses / total_days if @end_date <= @today
+
+    total_expenses_without_subscriptions / passed_days
+  end
+
   def expenses_forecast
     return nil if @end_date <= @today
 
-    total_expenses + (expenses_average_as_of_today * remaining_days)
+    total_expenses + (expenses_without_subscriptions_average_as_of_today * remaining_days)
+  end
+
+  def savings_forecast
+    return nil if @end_date <= @today
+
+    total_incomes + expenses_forecast
   end
 
   def total_days

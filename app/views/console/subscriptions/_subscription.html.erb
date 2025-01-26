@@ -1,0 +1,13 @@
+<tr>
+  <td><%= subscription.description %></td>
+  <td><%= currency_formatter(subscription.default_amount) %></td>
+  <td><%= subscription.subscription_type %></td>
+  <td>
+    <div class="d-inline-block">
+      <%= link_to t('labels.edit'), edit_console_subscription_path(subscription), class: "btn btn-sm btn-link d-inline" %>
+    </div>
+    <div class="d-inline-block">
+      <%= button_to t('labels.destroy'), console_subscription_path(subscription), method: :delete, class: "btn btn-sm btn-link d-inline" %>
+    </div>
+  </td>
+</tr>

@@ -1,11 +1,16 @@
 class Console::TransactionsController < ConsoleController
   include TransactionsConcern
-  before_action :set_transaction, only: [ :edit, :update, :destroy ]
-  before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
+  before_action :set_transaction, only: [:edit, :update, :destroy]
+  before_action :set_categories, only: [:edit, :new, :update, :index, :create]
 
   def index
     policy_scope(Transaction)
     params[:q] ||= { date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month }
+
+    if params[:apply_subscriptions].present?
+      SubscriptionsService.new(current_user).apply
+      flash[:success] = t("labels.subscriptions_applied")
+    end
     @q = current_user.transactions.ransack(params[:q])
     @transactions = @q.result
     @transactions_report = TransactionReportService.new(@transactions, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate

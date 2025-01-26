@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      subscription:
+        one: Subscription
+        other: Subscriptions
+    attributes:
+      subscription:
+        description: Description
+        default_amount: Default Amount
+        subscription_type: Type
