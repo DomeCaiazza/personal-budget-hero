@@ -1,7 +1,7 @@
 class Console::TransactionsController < ConsoleController
   include TransactionsConcern
-  before_action :set_transaction, only: [:edit, :update, :destroy]
-  before_action :set_categories, only: [:edit, :new, :update, :index, :create]
+  before_action :set_transaction, only: [ :edit, :update, :destroy ]
+  before_action :set_categories, only: [ :edit, :new, :update, :index, :create ]
 
   def index
     policy_scope(Transaction)
