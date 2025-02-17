@@ -15,6 +15,17 @@ RSpec.describe Console::CategoriesController, type: :controller do
       expect(response).to be_successful
     end
 
+    it 'returns a success response when transaction_type param is expense' do
+      get :index, params: { transaction_type: :expense }
+      expect(assigns(:categories)).to eq([category])
+    end
+
+    it 'returns a success response when transaction_type param is income' do
+      income_category = create(:category, user: user, category_type: 'incomes')
+      get :index, params: { transaction_type: :income }
+      expect(assigns(:categories)).to eq([income_category])
+    end
+
     it 'assigns the current user\'s categories to @categories' do
       category = create(:category, user: user)
       get :index
