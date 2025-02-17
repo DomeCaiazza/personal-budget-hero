@@ -47,5 +47,4 @@ RSpec.describe SubscriptionPolicy, type: :policy do
       expect(SubscriptionPolicy.new(guest, Subscription).generate_slug?).to be false
     end
   end
-
 end
