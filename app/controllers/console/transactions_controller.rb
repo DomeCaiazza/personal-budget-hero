@@ -12,7 +12,7 @@ class Console::TransactionsController < ConsoleController
       flash[:success] = t("labels.subscriptions_applied")
     end
     @q = current_user.transactions.ransack(params[:q])
-    @transactions = @q.result
+    @transactions = @q.result.order(date: :desc)
     @transactions_report = TransactionReportService.new(@transactions, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate
     authorize(@transactions)
   end

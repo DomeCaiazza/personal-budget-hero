@@ -5,7 +5,7 @@ class Webapp::TransactionsController < WebappController
 
   def index
     policy_scope(Transaction)
-    @transactions = current_user.transactions.order(id: :desc)
+    @transactions = current_user.transactions.order(date: :desc)
     authorize(@transactions)
   end
 

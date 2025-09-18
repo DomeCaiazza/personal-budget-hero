@@ -1,13 +1,13 @@
 version: '3'
 services:
-  db_personal_budget_hero:
-    image: mysql:8.0
-    platform: linux/x86_64
-    container_name: personal_budget_hero
+  db_pbh:
+    image: mariadb:10.11
+    container_name: pbh
     ports:
       - "4100:3306"
     volumes:
-      - ~/docker_mysql/personal_budget_hero:/var/lib/mysql/
+      - ~/docker_mysql/pbh:/var/lib/mysql/
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
-      MYSQL_ROOT_PASSWORD: ""
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+      MARIADB_ROOT_PASSWORD: ""
+    command: --default-authentication-plugin=mysql_native_password
