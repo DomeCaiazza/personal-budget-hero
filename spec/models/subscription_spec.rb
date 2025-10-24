@@ -1,6 +1,6 @@
 RSpec.describe Subscription, type: :model do
-  let(:user) { FactoryBot.create(:user) }
-  let(:subscription) { FactoryBot.create(:subscription, user: user) }
+  let(:account) { FactoryBot.create(:account) }
+  let(:subscription) { FactoryBot.create(:subscription, account: account) }
 
   describe 'validations' do
     it 'is valid with valid attributes' do

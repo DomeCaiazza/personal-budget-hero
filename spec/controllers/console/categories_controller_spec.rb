@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Console::CategoriesController, type: :controller do
-  let(:user) { create(:user) }
-  let(:category) { create(:category, user: user) }
+  let(:account) { create(:account) }
+  let(:category) { create(:category, user: account) }
 
   before do
     Rails.application.routes_reloader.execute_unless_loaded

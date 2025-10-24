@@ -1,8 +1,8 @@
 # spec/controllers/console/subscriptions_controller_spec.rb
 
 describe Console::SubscriptionsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:subscription) { create(:subscription, user: user) }
+  let(:account) { create(:account) }
+  let(:subscription) { create(:subscription, account: account) }
 
   before do
     Rails.application.routes_reloader.execute_unless_loaded

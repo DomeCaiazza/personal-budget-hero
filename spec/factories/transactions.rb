@@ -7,7 +7,7 @@ FactoryBot.define do
     transaction_type { 'expense' }
     created_at { Time.now }
     updated_at { Time.now }
-    association :user
+    association :account
     association :category
   end
 end

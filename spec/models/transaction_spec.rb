@@ -6,7 +6,7 @@ RSpec.describe Transaction, type: :model do
   let(:income_transaction) { FactoryBot.create(:transaction, transaction_type: 'income') }
 
   describe 'associations' do
-    it { should belong_to(:user) }
+    it { should belong_to(:account) }
     it { should belong_to(:category) }
   end
 
@@ -44,8 +44,8 @@ RSpec.describe Transaction, type: :model do
       expect(expense_transaction).to be_invalid
     end
 
-    it "is invalid without a user_id" do
-      expense_transaction.user_id = nil
+    it "is invalid without a account_id" do
+      expense_transaction.account_id = nil
       expect(expense_transaction).to be_invalid
     end
 

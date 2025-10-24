@@ -1,9 +1,6 @@
 FactoryBot.define do
-  factory :category do
+  factory :account do
     name { [ *('A'..'Z') ].sample(10).join }
-    hex_color { Faker::Color.hex_color }
-    category_type { 'expenses' }
-    association :account
     created_at { Time.now }
     updated_at { Time.now }
   end

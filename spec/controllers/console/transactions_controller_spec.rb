@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Console::TransactionsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:transaction) { create(:transaction, user: user) }
+  let(:account) { create(:account) }
+  let(:transaction) { create(:transaction, account: account) }
   let(:categories) { double('categories') }
 
   before do
