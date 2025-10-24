@@ -1,15 +1,20 @@
 module CategoriesConcern
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_account
+    before_action :set_category, only: [ :edit, :update, :destroy ]
+  end
+
   def index
     policy_scope(Category)
-    @categories = current_user.categories
+    @categories = @account.categories
     authorize(@categories)
   end
 
   def new
     policy_scope(Category)
-    @category = current_user.categories.build
+    @category = @account.categories.build
     authorize @category
   end
 
@@ -25,6 +30,10 @@ module CategoriesConcern
 
   def set_category
     policy_scope(Category)
-    @category = current_user.categories.find(params[:id])
+    @category = @account.categories.find(params[:id])
+  end
+
+  def set_account
+    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

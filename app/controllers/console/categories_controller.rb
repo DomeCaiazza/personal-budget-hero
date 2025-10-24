@@ -1,13 +1,12 @@
 class Console::CategoriesController < ConsoleController
   include CategoriesConcern
-  before_action :set_category, only: [ :edit, :update, :destroy ]
 
   def create
     policy_scope(Category)
-    @category = current_user.categories.build(category_params)
+    @category = @account.categories.build(category_params)
     authorize @category
     if @category.save
-      redirect_to console_categories_path, notice: t("labels.record_created")
+      redirect_to account_console_categories_path(@account), notice: t("labels.record_created")
     else
       render :new
     end
@@ -16,7 +15,7 @@ class Console::CategoriesController < ConsoleController
   def update
     authorize @category
     if @category.update(category_params)
-      redirect_to console_categories_path, notice: t("labels.record_modified")
+      redirect_to account_console_categories_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -27,10 +26,10 @@ class Console::CategoriesController < ConsoleController
     authorize @category
     if @category.destroy
       flash[:success] = t("labels.record_destroyed")
-      redirect_to console_categories_path
+      redirect_to account_console_categories_path
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@category.errors.full_messages.join(". ")}"
-      redirect_to console_categories_path
+      redirect_to account_console_categories_path
     end
   end
 end

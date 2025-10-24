@@ -1,15 +1,18 @@
 module TransactionsConcern
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_account
+  end
   def set_categories
     transaction_type = params[:transaction_type]
-    @categories = current_user.categories
+    @categories = @account.categories
     if transaction_type.present?
       case transaction_type
       when "expense"
-        @categories = current_user.categories.expense
+        @categories = @account.categories.expense
       when "income"
-        @categories = current_user.categories.income
+        @categories = @account.categories.income
       end
     end
   end
@@ -26,6 +29,9 @@ module TransactionsConcern
 
   def set_transaction
     policy_scope(Transaction)
-    @transaction = current_user.transactions.find(params[:id])
+    @transaction = @account.transactions.find(params[:id])
+  end
+  def set_account
+    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

@@ -8,10 +8,10 @@ class Console::TransactionsController < ConsoleController
     params[:q] ||= { date_gteq: Date.today.beginning_of_month, date_lteq: Date.today.end_of_month }
 
     if params[:apply_subscriptions].present?
-      SubscriptionsService.new(current_user).apply
+      SubscriptionsService.new(@account).apply
       flash[:success] = t("labels.subscriptions_applied")
     end
-    @q = current_user.transactions.ransack(params[:q])
+    @q = @account.transactions.ransack(params[:q])
     @transactions = @q.result.order(date: :desc)
     @transactions_report = TransactionReportService.new(@transactions, params[:q][:date_gteq].to_s, params[:q][:date_lteq].to_s).generate
     authorize(@transactions)
@@ -20,16 +20,16 @@ class Console::TransactionsController < ConsoleController
   def new
     policy_scope(Transaction)
     @transaction_type = params[:transaction_type] if Transaction.transaction_types.keys.include?(params[:transaction_type])
-    @transaction = current_user.transactions.build
+    @transaction = @account.transactions.build
     authorize @transaction
   end
 
   def create
     policy_scope(Transaction)
-    @transaction = current_user.transactions.build(transaction_params)
+    @transaction = @account.transactions.build(transaction_params)
     authorize @transaction
     if @transaction.save
-      redirect_to console_transactions_path, notice: t("labels.record_created")
+      redirect_to account_console_transactions_path, notice: t("labels.record_created")
     else
       render :new
     end
@@ -38,7 +38,7 @@ class Console::TransactionsController < ConsoleController
   def update
     authorize @transaction
     if @transaction.update(transaction_params)
-      redirect_to console_transactions_path, notice: t("labels.record_modified")
+      redirect_to account_console_transactions_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -52,6 +52,6 @@ class Console::TransactionsController < ConsoleController
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@transaction.errors.full_messages.join(". ")}"
     end
-    redirect_to console_transactions_path
+    redirect_to account_console_transactions_path
   end
 end

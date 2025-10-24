@@ -10,26 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_14_112514) do
-  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "hex_color"
+ActiveRecord::Schema[8.0].define(version: 2025_10_24_101843) do
+  create_table "account_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "user_id"], name: "index_account_users_on_account_id_and_user_id", unique: true
+    t.index ["account_id"], name: "index_account_users_on_account_id"
+    t.index ["user_id"], name: "index_account_users_on_user_id"
+  end
+
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.string "description"
+  end
+
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "hex_color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "category_type", default: 0
-    t.index ["user_id"], name: "index_categories_on_user_id"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_categories_on_account_id"
   end
 
   create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "description"
     t.decimal "default_amount", precision: 10, scale: 2
     t.integer "subscription_type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code"
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_subscriptions_on_account_id"
   end
 
   create_table "transactions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -39,10 +56,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_112514) do
     t.boolean "paid", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.integer "category_id"
     t.integer "transaction_type", default: 0
     t.string "subscription_code"
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -60,6 +78,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_14_112514) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "categories", "users"
-  add_foreign_key "subscriptions", "users"
+  add_foreign_key "account_users", "accounts", on_delete: :cascade
+  add_foreign_key "account_users", "users", on_delete: :cascade
+  add_foreign_key "categories", "accounts", on_delete: :cascade
+  add_foreign_key "subscriptions", "accounts", on_delete: :cascade
+  add_foreign_key "transactions", "accounts", on_delete: :cascade
 end

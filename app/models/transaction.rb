@@ -2,7 +2,7 @@ class Transaction < ApplicationRecord
   enum :transaction_type, { expense: 0, income: 1 }
   before_save :set_sign
 
-  belongs_to :user
+  belongs_to :account
   belongs_to :category
   validates :amount, :description, :date, :category_id, :transaction_type, presence: true
   scope :expenses, -> { where(transaction_type: :expense) }

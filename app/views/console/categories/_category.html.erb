@@ -5,11 +5,11 @@
   <td>
     <% if policy(category).edit? %>
       <div class="d-inline-block">
-        <%= link_to t('labels.edit'), edit_console_category_path(category), class: "btn btn-sm btn-link d-inline" %>
+        <%= link_to t('labels.edit'), edit_account_console_category_path(@account, category), class: "btn btn-sm btn-link d-inline" %>
       </div>
     <% end %>
     <div class="d-inline-block">
-      <%= button_to t('labels.destroy'), console_category_path(category), method: :delete, class: "btn btn-sm btn-link d-inline" %>
+      <%= button_to t('labels.destroy'), account_console_category_path(@account, category), method: :delete, class: "btn btn-sm btn-link d-inline" %>
     </div>
   </td>
 </tr>

@@ -1,7 +1,8 @@
 class Console::DashboardController < ConsoleController
+  before_action :set_account
   def index
     policy_scope(Transaction)
-    @categories = current_user.categories
+    @categories = @account.categories
     params[:q] ||= {}
     authorize(Transaction)
     if params.dig(:q, :date_eq).present?
@@ -10,7 +11,7 @@ class Console::DashboardController < ConsoleController
       params[:q][:date_lteq] = "#{year}-12-31"
     end
 
-    @q = current_user.transactions.ransack(params[:q])
+    @q = @account.transactions.ransack(params[:q])
     @transactions = @q.result
     transactions_data = @transactions.group(:category_id, Arel.sql("MONTH(date)")).sum(:amount)
 
@@ -35,5 +36,10 @@ class Console::DashboardController < ConsoleController
       }
     end
     category_data
+  end
+
+  private
+  def set_account
+    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

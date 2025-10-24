@@ -6,10 +6,10 @@
   <td><%= transaction.paid %></td>
   <td>
     <div class="d-inline-block">
-      <%= link_to t('labels.edit'), edit_console_transaction_path(transaction), class: "btn btn-sm btn-link d-inline" %>
+      <%= link_to t('labels.edit'), edit_account_console_transaction_path(@account, transaction), class: "btn btn-sm btn-link d-inline" %>
     </div>
     <div class="d-inline-block">
-      <%= button_to t('labels.destroy'), console_transaction_path(transaction), method: :delete, class: "btn btn-sm btn-link d-inline" %>
+      <%= button_to t('labels.destroy'), account_console_transaction_path(@account, transaction), method: :delete, class: "btn btn-sm btn-link d-inline" %>
     </div>
   </td>
 </tr>

@@ -1,9 +1,9 @@
 class Category < ApplicationRecord
   enum :category_type, { expenses: 0, incomes: 1, subscriptions: 2 }
-  belongs_to :user
+  belongs_to :account
   has_many :transactions
   validates :name, :hex_color, presence: true
-  validates :name, uniqueness: { scope: :user_id }
+  validates :name, uniqueness: { scope: :account_id }
   validates :hex_color, format: { with: /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/ }
   validates :category_type, presence: true
 

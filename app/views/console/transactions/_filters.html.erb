@@ -1,5 +1,5 @@
 <h5>Search</h5>
-<%= search_form_for @q, url: console_transactions_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
+<%= search_form_for @q, url: account_console_transactions_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
   <div class="row">
     <div class="col-sm-3 form-group has-feedback">
       <%= f.label :description_cont, Transaction.human_attribute_name(:description), class: 'control-label' %>

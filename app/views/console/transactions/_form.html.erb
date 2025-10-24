@@ -1,4 +1,4 @@
-<%= form_for [:console, @transaction], class: 'mb-4' do |f| %>
+<%= form_for [:account_console, @transaction], class: 'mb-4' do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@transaction.errors.count, "error") %>:</h2>
@@ -22,7 +22,7 @@
                  { include_blank: '---', required: true, default: 'q' },
                  class: 'form-control' %>
 
-    <%= link_to 'Handle categories', console_categories_path, class: '' %>
+    <%= link_to 'Handle categories', account_console_categories_path, class: '' %>
   </div>
 
 

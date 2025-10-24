@@ -1,14 +1,15 @@
 class Console::SubscriptionsController < ConsoleController
+  before_action :set_account
   before_action :set_subscription, only: [ :edit, :update, :destroy ]
   def index
     policy_scope(Subscription)
-    @subscriptions = current_user.subscriptions
+    @subscriptions = @account.subscriptions
     authorize(@subscriptions)
   end
 
   def new
     policy_scope(Subscription)
-    @subscription = current_user.subscriptions.build
+    @subscription = @account.subscriptions.build
     authorize @subscription
   end
 
@@ -18,10 +19,10 @@ class Console::SubscriptionsController < ConsoleController
 
   def create
     policy_scope(Subscription)
-    @subscription = current_user.subscriptions.build(subscription_params)
+    @subscription = @account.subscriptions.build(subscription_params)
     authorize @subscription
     if @subscription.save
-      redirect_to console_subscriptions_path, notice: t("labels.record_created")
+      redirect_to account_console_subscriptions_path, notice: t("labels.record_created")
     else
       render :new
     end
@@ -30,7 +31,7 @@ class Console::SubscriptionsController < ConsoleController
   def update
     authorize @subscription
     if @subscription.update(subscription_params)
-      redirect_to console_subscriptions_path, notice: t("labels.record_modified")
+      redirect_to account_console_subscriptions_path, notice: t("labels.record_modified")
     else
       render :edit
     end
@@ -41,10 +42,10 @@ class Console::SubscriptionsController < ConsoleController
     authorize @subscription
     if @subscription.destroy
       flash[:success] = t("labels.record_destroyed")
-      redirect_to console_subscriptions_path
+      redirect_to account_console_subscriptions_path
     else
       flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@subscription.errors.full_messages.join(". ")}"
-      redirect_to console_subscriptions_path
+      redirect_to account_console_subscriptions_path
     end
   end
 
@@ -56,6 +57,10 @@ class Console::SubscriptionsController < ConsoleController
 
   def set_subscription
     policy_scope(Subscription)
-    @subscription = current_user.subscriptions.find(params[:id])
+    @subscription = @account.subscriptions.find(params[:id])
+  end
+
+  def set_account
+    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end
