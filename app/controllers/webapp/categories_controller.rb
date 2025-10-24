@@ -4,12 +4,12 @@ class Webapp::CategoriesController < WebappController
 
   def create
     policy_scope(Category)
-    @category = current_user.categories.new(category_params)
+    @category = @account.categories.new(category_params)
     authorize @category
 
     if @category.save
       flash[:success] = t("labels.record_created")
-      redirect_to webapp_categories_path, success: t("labels.record_created")
+      redirect_to account_webapp_categories_path(@account), success: t("labels.record_created")
     else
       flash[:danger] = @category.errors.full_messages.join("<br>").html_safe
       render :new, status: :unprocessable_entity
@@ -19,7 +19,7 @@ class Webapp::CategoriesController < WebappController
   def update
     authorize(@category)
     if @category.update(category_params)
-      redirect_to webapp_categories_path, notice: t("labels.record_modified")
+      redirect_to account_webapp_categories_path(@account), notice: t("labels.record_modified")
     else
       render :edit
     end

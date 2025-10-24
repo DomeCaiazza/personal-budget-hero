@@ -43,7 +43,7 @@ RSpec.describe Webapp::CategoriesController, type: :controller do
 
         it 'redirects to the new category path' do
           post :create, params: { category: attributes_for(:category) }
-          expect(response).to redirect_to(webapp_categories_path)
+          expect(response).to redirect_to(account_webapp_categories_path(@account))
         end
       end
 
@@ -95,7 +95,7 @@ RSpec.describe Webapp::CategoriesController, type: :controller do
 
         it 'redirects to the categories path' do
           patch :update, params: { id: category.id, category: { name: 'Updated Name' } }
-          expect(response).to redirect_to(webapp_categories_path)
+          expect(response).to redirect_to(account_webapp_categories_path(@account))
         end
       end
 

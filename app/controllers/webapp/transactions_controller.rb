@@ -5,7 +5,7 @@ class Webapp::TransactionsController < WebappController
 
   def index
     policy_scope(Transaction)
-    @transactions = current_user.transactions.order(date: :desc)
+    @transactions = @account.transactions.order(date: :desc)
     authorize(@transactions)
   end
 
@@ -17,11 +17,11 @@ class Webapp::TransactionsController < WebappController
 
   def create
     policy_scope(Transaction)
-    @transaction = current_user.transactions.new(transaction_params)
+    @transaction = @account.transactions.new(transaction_params)
     authorize @transaction
     if @transaction.save
       flash[:success] = t("labels.record_created")
-      redirect_to new_webapp_transaction_path, success: t("labels.record_created")
+      redirect_to new_account_webapp_transaction_path(@account), success: t("labels.record_created")
     else
       flash[:danger] = @transaction.errors.full_messages.join("<br>").html_safe
       render :new, status: :unprocessable_entity
@@ -31,7 +31,7 @@ class Webapp::TransactionsController < WebappController
   def update
     authorize @transaction
     if @transaction.update(transaction_params)
-      redirect_to webapp_transactions_path, notice: t("labels.record_modified")
+      redirect_to account_webapp_transactions_path(@account), notice: t("labels.record_modified")
     else
       render :edit
     end

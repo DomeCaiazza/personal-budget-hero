@@ -59,7 +59,7 @@ RSpec.describe Webapp::TransactionsController, type: :controller do
 
       it 'redirects to the new transaction path' do
         post :create, params: { transaction: attributes_for(:transaction).merge(category_id: create(:category).id) }
-        expect(response).to redirect_to(new_webapp_transaction_path)
+        expect(response).to redirect_to(new_account_webapp_transaction_path(@account))
       end
     end
 

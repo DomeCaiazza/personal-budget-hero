@@ -1,5 +1,5 @@
 <div class="container my-3">
-  <p class="h2">  <%= link_to '<', webapp_transactions_path, class: 'btn btn-outline-secondary' %>
+  <p class="h2">  <%= link_to '<', account_webapp_transactions_path(@account), class: 'btn btn-outline-secondary' %>
     New <%= @transaction_type.present? ? t("activerecord.labels.transaction.#{@transaction_type}") :
               t("activerecord.models.transaction.one") %></p>
 </div>
