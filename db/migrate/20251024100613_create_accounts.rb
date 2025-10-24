@@ -11,7 +11,7 @@ class CreateAccounts < ActiveRecord::Migration[8.0]
       t.references :user, null: false, foreign_key: { on_delete: :cascade }
       t.timestamps
 
-      t.index [:account_id, :user_id], unique: true
+      t.index [ :account_id, :user_id ], unique: true
     end
   end
 end

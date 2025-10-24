@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticate :user do
-    resources :accounts, only: [:index, :show, :new, :create] do
+    resources :accounts, only: [ :index, :show, :new, :create ] do
       member do
         post :switch
       end
