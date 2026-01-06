@@ -36,7 +36,7 @@ PBH è composta da una console web con interfaccia utente semplice e un'interfac
 ## Tecnologie
 
 - **Ruby** 3.3.5
-- **Rails** 8.0.1
+- **Rails** 8.1
 - **MySQL** 8
 - **Tailwind CSS** 4.4.0
 - **Bootstrap** 5.3.3
