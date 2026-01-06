@@ -1,32 +1,32 @@
 <div class="w-full bg-white shadow rounded-lg p-6 mb-6">
-  <h3 class="text-lg font-semibold text-gray-900 mb-4">Search Filters</h3>
+  <h3 class="text-lg font-semibold text-gray-900 mb-4"><%= t("views.console.transactions._filters.title") %></h3>
   <%= search_form_for @q, url: account_console_transactions_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
       <div>
         <%= f.label :description_cont, Transaction.human_attribute_name(:description), class: 'form-label' %>
-        <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Find by description' %>
+        <%= f.search_field :description_cont, class: 'form-control', placeholder: t("views.console.transactions._filters.find_by_description") %>
       </div>
       <div>
         <%= f.label :category_name_cont, Category.human_attribute_name(:name), class: 'form-label' %>
-        <%= f.search_field :category_name_cont, class: 'form-control', placeholder: 'Find by category' %>
+        <%= f.search_field :category_name_cont, class: 'form-control', placeholder: t("views.console.transactions._filters.find_by_category") %>
       </div>
       <div>
-        <%= f.label :date_gteq, 'Start Date', class: 'form-label' %>
-        <%= f.date_field :date_gteq, class: 'form-control', placeholder: 'Start Date' %>
+        <%= f.label :date_gteq, t("views.console.transactions._filters.start_date"), class: 'form-label' %>
+        <%= f.date_field :date_gteq, class: 'form-control', placeholder: t("views.console.transactions._filters.start_date") %>
       </div>
       <div>
-        <%= f.label :date_lteq, 'End Date', class: 'form-label' %>
-        <%= f.date_field :date_lteq, class: 'form-control', placeholder: 'End Date' %>
+        <%= f.label :date_lteq, t("views.console.transactions._filters.end_date"), class: 'form-label' %>
+        <%= f.date_field :date_lteq, class: 'form-control', placeholder: t("views.console.transactions._filters.end_date") %>
       </div>
     </div>
     <div class="flex flex-wrap gap-2 mb-4">
-      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="all" class="btn btn-sm btn-secondary">All</button>
-      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="last-month" class="btn btn-sm btn-secondary">Last month</button>
-      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="this-month" class="btn btn-sm btn-secondary">This month</button>
+      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="all" class="btn btn-sm btn-secondary"><%= t("views.console.transactions._filters.all") %></button>
+      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="last-month" class="btn btn-sm btn-secondary"><%= t("views.console.transactions._filters.last_month") %></button>
+      <button type="button" data-controller="transactions" data-action="click->transactions#setMonthField" data-transactions-month="this-month" class="btn btn-sm btn-secondary"><%= t("views.console.transactions._filters.this_month") %></button>
     </div>
     <div class="flex gap-2">
-      <%= f.submit 'Search', class: 'btn btn-primary' %>
-      <%= link_to 'Cancel', request.path, class: 'btn btn-secondary' %>
+      <%= f.submit t("labels.search"), class: 'btn btn-primary' %>
+      <%= link_to t("labels.cancel"), request.path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 </div>

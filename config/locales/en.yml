@@ -237,6 +237,15 @@ en:
           title: New Transaction
         edit:
           title: Edit Transaction
+        _filters:
+          title: Search Filters
+          find_by_description: Find by description
+          find_by_category: Find by category
+          start_date: Start Date
+          end_date: End Date
+          all: All
+          last_month: Last month
+          this_month: This month
         _form:
           manage_categories: Manage categories →
           placeholder_description: e.g. coffee with colleagues

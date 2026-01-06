@@ -237,6 +237,15 @@ it:
           title: Nuova Transazione
         edit:
           title: Modifica Transazione
+        _filters:
+          title: Filtri di Ricerca
+          find_by_description: Cerca per descrizione
+          find_by_category: Cerca per categoria
+          start_date: Data Inizio
+          end_date: Data Fine
+          all: Tutti
+          last_month: Mese scorso
+          this_month: Questo mese
         _form:
           manage_categories: Gestisci categorie →
           placeholder_description: es. caffè con i colleghi
