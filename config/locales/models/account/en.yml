@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      account:
+        one: Account
+        other: Accounts
+    attributes:
+      account:
+        name: Name
+        description: Description
+

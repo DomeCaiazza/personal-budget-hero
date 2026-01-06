@@ -26,5 +26,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root "console/dashboard#index"
+  root "accounts#index"
 end

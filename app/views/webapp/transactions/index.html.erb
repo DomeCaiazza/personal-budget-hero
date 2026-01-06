@@ -1,6 +1,7 @@
 <div class="w-full">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
     <div>
+      <%= render 'shared/account_name' %>
       <h1 class="text-2xl font-bold text-gray-900 mb-2"><%= t("views.webapp.transactions.index.title") %></h1>
       <%= link_to account_webapp_categories_path(@account), 
           class: 'text-sm text-gray-600 hover:text-blue-600 font-medium inline-flex items-center transition-colors' do %>

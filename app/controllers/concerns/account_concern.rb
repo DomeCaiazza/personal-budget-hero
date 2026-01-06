@@ -8,8 +8,8 @@ module AccountConcern
   private
 
   def set_account
-    if params[:account_id].blank? && current_user.accounts.count > 0
-      redirect_to account_console_dashboard_path(account_id: current_user.accounts.first.id)
+    if params[:account_id].blank?
+      redirect_to accounts_path
       return
     end
     @account = current_user.accounts.find(params[:account_id])

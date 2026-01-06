@@ -205,6 +205,12 @@ en:
         update:
           success: Category updated successfully
           error: Error updating category
+    accounts:
+      create:
+        success: Account created successfully
+        error: Error creating account
+      switch:
+        success: Account selected successfully
   # Views
   views:
     pagination:
@@ -278,13 +284,16 @@ en:
         _form:
           placeholder_name: Category name
           select_color: Select a color for this category
-      categories:
-        index:
-          title: Categories
-        new:
-          title: New Category
-        edit:
-          title: Edit Category
+    accounts:
+      index:
+        title: Select Account
+        no_accounts: No accounts found
+        create_first_account: Create your first account
+      new:
+        title: New Account
+        name_placeholder: e.g. Personal Account
+        description_placeholder: Optional account description
+        errors_title: Error creating account
     layouts:
       console:
         title: Personal Budget Hero
