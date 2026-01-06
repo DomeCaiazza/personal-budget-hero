@@ -1,1 +1,6 @@
 @import "feathericon";
+
+// Accordion icon rotation
+details[open] summary .details-open-icon {
+  transform: rotate(180deg);
+}

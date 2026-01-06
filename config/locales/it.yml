@@ -307,6 +307,13 @@ it:
         name_placeholder: es. Conto Personale
         description_placeholder: Descrizione opzionale dell'account
         errors_title: Errore nella creazione dell'account
+      _account_card:
+        modal:
+          title: Scegli la versione
+          question: Come vuoi aprire l'account "%{account_name}"?
+          console: Console
+          webapp: Webapp
+          cancel: Annulla
     layouts:
       console:
         title: Personal Budget Hero

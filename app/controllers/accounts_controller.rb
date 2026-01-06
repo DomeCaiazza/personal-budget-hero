@@ -35,8 +35,15 @@ class AccountsController < ApplicationController
     @account = current_user.accounts.find(params[:id])
     authorize @account
     
-    # Reindirizza alla dashboard console dell'account selezionato
-    redirect_to account_console_dashboard_path(@account), notice: t("controllers.accounts.switch.success")
+    version = params[:version] || "console"
+    
+    if version == "webapp"
+      # Reindirizza alla pagina principale webapp (transactions index)
+      redirect_to account_webapp_transactions_path(@account), notice: t("controllers.accounts.switch.success")
+    else
+      # Reindirizza alla dashboard console dell'account selezionato
+      redirect_to account_console_dashboard_path(@account), notice: t("controllers.accounts.switch.success")
+    end
   end
 
   private

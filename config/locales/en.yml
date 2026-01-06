@@ -307,6 +307,13 @@ en:
         name_placeholder: e.g. Personal Account
         description_placeholder: Optional account description
         errors_title: Error creating account
+      _account_card:
+        modal:
+          title: Choose version
+          question: How do you want to open the account "%{account_name}"?
+          console: Console
+          webapp: Webapp
+          cancel: Cancel
     layouts:
       console:
         title: Personal Budget Hero

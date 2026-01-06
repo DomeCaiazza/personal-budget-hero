@@ -1,6 +1,14 @@
-<div class="w-full bg-white shadow rounded-lg p-6 mb-6">
-  <h3 class="text-lg font-semibold text-gray-900 mb-4">Financial Report</h3>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<details class="w-full bg-white shadow rounded-lg mb-6">
+  <summary class="cursor-pointer p-6 pb-4 list-none">
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-gray-900">Financial Report</h3>
+      <svg class="w-5 h-5 text-gray-500 transition-transform duration-200 rotate-0 details-open-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </summary>
+  <div class="px-6 pb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <div class="bg-red-50 border border-red-200 rounded-lg p-4">
       <div class="text-sm font-medium text-red-800 mb-1">Total Expenses</div>
       <div class="text-2xl font-bold text-red-900"><%= currency_formatter(@transactions_report[:total_expenses])%></div>
@@ -37,5 +45,6 @@
       <div class="text-sm font-medium text-purple-800 mb-1">Saving Forecast</div>
       <div class="text-xl font-bold text-purple-900"><%= currency_formatter(@transactions_report[:savings_forecast]) %></div>
     </div>
+    </div>
   </div>
-</div>
+</details>
