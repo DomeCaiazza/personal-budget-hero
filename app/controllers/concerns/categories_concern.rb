@@ -2,7 +2,7 @@ module CategoriesConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_account
+    include AccountConcern
     before_action :set_category, only: [ :edit, :update, :destroy ]
   end
 
@@ -31,9 +31,5 @@ module CategoriesConcern
   def set_category
     policy_scope(Category)
     @category = @account.categories.find(params[:id])
-  end
-
-  def set_account
-    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

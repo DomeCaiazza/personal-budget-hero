@@ -1,5 +1,6 @@
 class Console::DashboardController < ConsoleController
-  before_action :set_account
+  include AccountConcern
+
   def index
     policy_scope(Transaction)
     @categories = @account.categories
@@ -36,10 +37,5 @@ class Console::DashboardController < ConsoleController
       }
     end
     category_data
-  end
-
-  private
-  def set_account
-    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

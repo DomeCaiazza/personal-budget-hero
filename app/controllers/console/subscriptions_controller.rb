@@ -1,5 +1,5 @@
 class Console::SubscriptionsController < ConsoleController
-  before_action :set_account
+  include AccountConcern
   before_action :set_subscription, only: [ :edit, :update, :destroy ]
   def index
     policy_scope(Subscription)
@@ -58,9 +58,5 @@ class Console::SubscriptionsController < ConsoleController
   def set_subscription
     policy_scope(Subscription)
     @subscription = @account.subscriptions.find(params[:id])
-  end
-
-  def set_account
-    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end

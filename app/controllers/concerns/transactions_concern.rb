@@ -2,7 +2,7 @@ module TransactionsConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_account
+    include AccountConcern
   end
   def set_categories
     transaction_type = params[:transaction_type]
@@ -30,8 +30,5 @@ module TransactionsConcern
   def set_transaction
     policy_scope(Transaction)
     @transaction = @account.transactions.find(params[:id])
-  end
-  def set_account
-    @account = current_user.accounts.find(params[:account_id]) if params[:account_id].present?
   end
 end
