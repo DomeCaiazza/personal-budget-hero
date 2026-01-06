@@ -1,7 +1,8 @@
-<div class="card mb-2">
-  <%= link_to policy(category).edit? ? edit_account_webapp_category_path(@account, category) : "#", class: ' link-underline link-underline-opacity-0' do %>
-    <div class="card-body" style="background-color: <%= category.hex_color %>">
-      <h5 class="card-title mb-1 <%= category.hex_color.blank? ? "text-black" : "text-white" %>"><%= category.name %></h5>
-    </div>
-  <%- end %>
-</div>
+<%= link_to policy(category).edit? ? edit_account_webapp_category_path(@account, category) : "#", 
+    class: 'block rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 overflow-hidden' do %>
+  <div class="p-6 text-center" style="background-color: <%= category.hex_color.presence || '#gray' %>">
+    <h3 class="text-lg font-semibold <%= category.hex_color.present? ? 'text-white' : 'text-gray-900' %>">
+      <%= category.name %>
+    </h3>
+  </div>
+<% end %>

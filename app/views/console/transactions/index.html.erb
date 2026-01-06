@@ -1,26 +1,51 @@
-<h2>Transactions</h2>
-<div class="text-end">
-  <%= link_to t('activerecord.labels.transaction.apply_subscriptions'), account_console_transactions_path(apply_subscriptions: true), class: 'btn btn-sm btn-secondary' %>
-  <%= link_to t('activerecord.labels.transaction.new_income'), new_account_console_transaction_path(transaction_type: 'income'), class: 'btn btn-sm btn-success' %>
-    <%= link_to t('activerecord.labels.transaction.new_expense'), new_account_console_transaction_path(transaction_type: 'expense'), class: 'btn btn-sm btn-danger' %>
-</div>
+<div class="w-full mb-6">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+    <h2 class="text-2xl font-bold text-gray-900">Transactions</h2>
+    <div class="flex flex-wrap gap-2">
+      <%= link_to account_console_transactions_path(apply_subscriptions: true), 
+          class: 'btn btn-sm btn-secondary' do %>
+        <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <%= t('activerecord.labels.transaction.apply_subscriptions') %>
+      <% end %>
+      <%= link_to new_account_console_transaction_path(transaction_type: 'income'), 
+          class: 'btn btn-sm btn-success' do %>
+        <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <%= t('activerecord.labels.transaction.new_income') %>
+      <% end %>
+      <%= link_to new_account_console_transaction_path(transaction_type: 'expense'), 
+          class: 'btn btn-sm btn-danger' do %>
+        <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+        </svg>
+        <%= t('activerecord.labels.transaction.new_expense') %>
+      <% end %>
+    </div>
+  </div>
 
-<%= render 'console/transactions/filters' %>
-<%= render 'console/transactions/report' %>
-<div class="table-responsive small">
-  <table class="table table-sm">
-    <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Description</th>
-      <th scope="col">Category</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Paid</th>
-      <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= render partial: 'console/transactions/transaction', collection: @transactions, as: :transaction %>
-    </tbody>
-  </table>
+  <%= render 'console/transactions/filters' %>
+  <%= render 'console/transactions/report' %>
+  
+  <div class="w-full bg-white shadow rounded-lg overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Paid</th>
+            <th scope="col" class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'console/transactions/transaction', collection: @transactions, as: :transaction %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

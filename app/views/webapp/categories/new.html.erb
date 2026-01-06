@@ -1,6 +1,12 @@
-<div class="container my-3">
-  <p class="h2">  <%= link_to '<', account_webapp_categories_path(@account), class: 'btn btn-outline-secondary' %> New category</p>
-</div>
-<div class="container my-3">
+<div class="w-full">
+  <div class="mb-4">
+    <%= link_to account_webapp_categories_path(@account), 
+        class: 'inline-flex items-center text-blue-600 hover:text-blue-800 mb-4' do %>
+      <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span class="text-xl font-semibold">New category</span>
+    <% end %>
+  </div>
   <%= render 'form' %>
 </div>

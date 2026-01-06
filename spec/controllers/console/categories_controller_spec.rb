@@ -1,45 +1,47 @@
 require 'rails_helper'
 
 RSpec.describe Console::CategoriesController, type: :controller do
+  let(:user) { create(:user) }
   let(:account) { create(:account) }
-  let(:category) { create(:category, user: account) }
+  let(:category) { create(:category, account: account) }
 
   before do
+    create(:account_user, user: user, account: account)
     Rails.application.routes_reloader.execute_unless_loaded
     sign_in(user)
   end
 
   describe 'GET #index' do
     it 'returns a success response' do
-      get :index
+      get :index, params: { account_id: account.id }
       expect(response).to be_successful
     end
 
     it 'returns a success response when transaction_type param is expense' do
-      get :index, params: { transaction_type: :expense }
+      get :index, params: { account_id: account.id, transaction_type: :expense }
       expect(assigns(:categories)).to eq([ category ])
     end
 
     it 'returns a success response when transaction_type param is income' do
-      income_category = create(:category, user: user, category_type: 'incomes')
-      get :index, params: { transaction_type: :income }
+      income_category = create(:category, account: account, category_type: 'incomes')
+      get :index, params: { account_id: account.id, transaction_type: :income }
       expect(assigns(:categories)).to eq([ income_category ])
     end
 
     it 'assigns the current user\'s categories to @categories' do
-      category = create(:category, user: user)
-      get :index
+      category = create(:category, account: account)
+      get :index, params: { account_id: account.id }
       expect(assigns(:categories)).to eq([ category ])
     end
 
     describe 'GET #new' do
       it 'returns a success response' do
-        get :new
+        get :new, params: { account_id: account.id }
         expect(response).to be_successful
       end
 
       it 'initializes a new category' do
-        get :new
+        get :new, params: { account_id: account.id }
         expect(assigns(:category)).to be_a_new(Category)
       end
     end
@@ -48,25 +50,25 @@ RSpec.describe Console::CategoriesController, type: :controller do
       context 'with valid parameters' do
         it 'creates a new category' do
           expect {
-            post :create, params: { category: attributes_for(:category) }
+            post :create, params: { account_id: account.id, category: attributes_for(:category) }
           }.to change(Category, :count).by(1)
         end
 
         it 'redirects to the new category path' do
-          post :create, params: { category: attributes_for(:category) }
-          expect(response).to redirect_to(console_categories_path)
+          post :create, params: { account_id: account.id, category: attributes_for(:category) }
+          expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
         end
       end
 
       context 'with invalid parameters' do
         it 'does not create a new category' do
           expect {
-            post :create, params: { category: attributes_for(:category, name: nil) }
+            post :create, params: { account_id: account.id, category: attributes_for(:category, name: nil) }
           }.to change(Category, :count).by(0)
         end
 
         it 'renders the new template' do
-          post :create, params: { category: attributes_for(:category, name: nil) }
+          post :create, params: { account_id: account.id, category: attributes_for(:category, name: nil) }
           expect(response).to render_template(:new)
         end
       end
@@ -75,22 +77,22 @@ RSpec.describe Console::CategoriesController, type: :controller do
     describe 'GET #edit' do
       context 'when the user is authorized' do
         it 'returns a success response' do
-          get :edit, params: { id: category.id }
+          get :edit, params: { account_id: account.id, id: category.id }
           expect(response).to be_successful
         end
 
         it 'assigns the requested category to @category' do
-          get :edit, params: { id: category.id }
+          get :edit, params: { account_id: account.id, id: category.id }
           expect(assigns(:category)).to eq(category)
         end
       end
 
       context 'when the user is not authorized' do
         it 'raises a ActiveRecord::RecordNotFound' do
-            other_user = create(:user)
-          other_category = create(:category, user: other_user)
+          other_account = create(:account)
+          other_category = create(:category, account: other_account)
           expect {
-            get :edit, params: { id: other_category.id }
+            get :edit, params: { account_id: account.id, id: other_category.id }
           }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
@@ -99,36 +101,36 @@ RSpec.describe Console::CategoriesController, type: :controller do
     describe 'PATCH #update' do
       context 'with valid parameters' do
         it 'updates the category' do
-          patch :update, params: { id: category.id, category: { name: 'Updated Name' } }
+          patch :update, params: { account_id: account.id, id: category.id, category: { name: 'Updated Name' } }
           category.reload
           expect(category.name).to eq('Updated Name')
         end
 
         it 'redirects to the categories path' do
-          patch :update, params: { id: category.id, category: { name: 'Updated Name' } }
-          expect(response).to redirect_to(console_categories_path)
+          patch :update, params: { account_id: account.id, id: category.id, category: { name: 'Updated Name' } }
+          expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
         end
       end
 
       context 'with invalid parameters' do
         it 'does not update the category' do
-          patch :update, params: { id: category.id, category: { name: nil } }
+          patch :update, params: { account_id: account.id, id: category.id, category: { name: nil } }
           category.reload
           expect(category.name).not_to be_nil
         end
 
         it 'renders the edit template' do
-          patch :update, params: { id: category.id, category: { name: nil } }
+          patch :update, params: { account_id: account.id, id: category.id, category: { name: nil } }
           expect(response).to render_template(:edit)
         end
       end
 
       context 'when the user is not authorized' do
         it 'raises a ActiveRecord::RecordNotFound' do
-          other_user = create(:user)
-          other_category = create(:category, user: other_user)
+          other_account = create(:account)
+          other_category = create(:category, account: other_account)
           expect {
-            patch :update, params: { id: other_category.id, category: { name: 'Updated Name' } }
+            patch :update, params: { account_id: account.id, id: other_category.id, category: { name: 'Updated Name' } }
           }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
@@ -136,27 +138,27 @@ RSpec.describe Console::CategoriesController, type: :controller do
       describe 'DELETE #destroy' do
         context 'when the category is successfully destroyed' do
           it 'redirects to the categories path with a success message' do
-            delete :destroy, params: { id: category.id }
-            expect(response).to redirect_to(console_categories_path)
+            delete :destroy, params: { account_id: account.id, id: category.id }
+            expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
             expect(flash[:success]).to eq(I18n.t("labels.record_destroyed"))
           end
         end
 
         context 'when the category cannot be destroyed' do
           it 'redirects to the categories path with an error message' do
-            create(:transaction, category: category)
-            delete :destroy, params: { id: category.id }
-            expect(response).to redirect_to(console_categories_path)
+            create(:transaction, account: account, category: category)
+            delete :destroy, params: { account_id: account.id, id: category.id }
+            expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
             expect(flash[:danger]).to include(I18n.t("labels.error_record_destroyed"))
           end
         end
 
         context 'when the user is not authorized' do
           it 'raises a ActiveRecord::RecordNotFound' do
-            other_user = create(:user)
-            other_category = create(:category, user: other_user)
+            other_account = create(:account)
+            other_category = create(:category, account: other_account)
             expect {
-              delete :destroy, params: { id: other_category.id }
+              delete :destroy, params: { account_id: account.id, id: other_category.id }
             }.to raise_error(ActiveRecord::RecordNotFound)
           end
         end

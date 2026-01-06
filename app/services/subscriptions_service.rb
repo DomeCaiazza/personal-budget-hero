@@ -6,16 +6,16 @@ class SubscriptionsService
     "annual" => 12
   }.freeze
 
-  def initialize(user)
-    @user = user
-    return if @user.blank?
+  def initialize(account)
+    @account = account
+    return if @account.blank?
 
-    create_subscriptions_category if @user.categories.subscriptions.empty?
-    @transactions = @user.transactions.expenses.where.not(subscription_code: nil)
+    create_subscriptions_category if @account.categories.subscriptions.empty?
+    @transactions = @account.transactions.expenses.where.not(subscription_code: nil)
   end
 
   def apply
-    @user.subscriptions.find_each do |subscription|
+    @account.subscriptions.find_each do |subscription|
       months = SUBSCRIPTION_TYPE_TO_MONTHS[subscription.subscription_type]
       next if months.nil?
 
@@ -41,7 +41,7 @@ class SubscriptionsService
   end
 
   def create_subscriptions_category
-    @user.categories.create!(
+    @account.categories.create!(
       name: Subscription.model_name.plural.capitalize,
       hex_color: "#73b3d9",
       category_type: :subscriptions
@@ -49,9 +49,9 @@ class SubscriptionsService
   end
 
   def create_subscription_transaction(subscription)
-    @user.transactions.create!(
+    @account.transactions.create!(
       subscription_code: subscription.code,
-      category_id: @user.categories.subscriptions.first.id,
+      category_id: @account.categories.subscriptions.first.id,
       amount: subscription.default_amount,
       description: subscription.description,
       date: Time.current.beginning_of_month,

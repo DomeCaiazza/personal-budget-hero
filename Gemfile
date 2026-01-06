@@ -43,6 +43,8 @@ gem "feathericon-sass"
 
 gem "sassc-rails"
 
+gem "tailwindcss-rails"
+
 gem "ransack"
 
 gem "kaminari"

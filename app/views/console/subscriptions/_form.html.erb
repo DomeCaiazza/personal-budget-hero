@@ -1,53 +1,73 @@
-<%= form_for [:account_console, @subscription], class: 'mb-4' do |f| %>
-  <% if @subscription.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@subscription.errors.count, "error") %>:</h2>
-      <ul>
-        <% @subscription.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="w-full bg-white shadow rounded-lg p-6">
+  <%= form_for [:account_console, @subscription] do |f| %>
+    <% if @subscription.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger mb-6">
+        <h2 class="font-semibold mb-2"><%= pluralize(@subscription.errors.count, "error") %>:</h2>
+        <ul class="list-disc list-inside">
+          <% @subscription.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :description, t('activerecord.attributes.subscription.description'), class: "form-label" %>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :default_amount, class: 'form-label' %>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <span class="text-gray-500 sm:text-sm">€</span>
+        </div>
+        <%= f.number_field :default_amount,
+                           class: 'form-control pl-7',
+                           step: '0.01',
+                           required: true,
+                           inputmode: 'decimal',
+                           placeholder: '0.00' %>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="form-label"><%= t('activerecord.attributes.subscription.subscription_type') %></label>
+      <div class="mt-2 grid grid-cols-2 gap-2">
+        <div class="flex items-center">
+          <%= f.radio_button :subscription_type, 'monthly', 
+              class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
+              required: true %>
+          <%= f.label :subscription_type_monthly, t('labels.monthly'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+        <div class="flex items-center">
+          <%= f.radio_button :subscription_type, 'annual', 
+              class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
+              required: true %>
+          <%= f.label :subscription_type_annual, t('labels.annual'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+        <div class="flex items-center">
+          <%= f.radio_button :subscription_type, 'quarterly', 
+              class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
+              required: true %>
+          <%= f.label :subscription_type_quarterly, t('labels.quarterly'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+        <div class="flex items-center">
+          <%= f.radio_button :subscription_type, 'semiannual', 
+              class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
+              required: true %>
+          <%= f.label :subscription_type_semiannual, t('labels.semiannual'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <%= f.submit @subscription.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
+      <%= link_to 'Cancel', account_console_subscriptions_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
-
-  <div class="mb-3">
-    <%= f.label :description, t('activerecord.attributes.subscription.description'), class: "form-label" %>
-    <%= f.text_field :description, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :default_amount, class: 'form-label' %>
-    <div class="input-group">
-      <span class="input-group-text">€</span>
-      <%= f.number_field :default_amount,
-                         class: 'form-control form-control',
-                         step: '0.01',
-                         required: true,
-                         inputmode: 'decimal' %>
-    </div>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :subscription_type, t('activerecord.attributes.subscription.subscription_type'), class: 'form-label' %>
-    <div>
-      <%= f.radio_button :subscription_type, 'monthly', class: 'form-check-input', required: true %>
-      <%= f.label :subscription_type_monthly, t('labels.monthly'), class: 'form-check-label' %>
-    </div>
-    <div>
-      <%= f.radio_button :subscription_type, 'annual', class: 'form-check-input', required: true %>
-      <%= f.label :subscription_type_annual, t('labels.annual'), class: 'form-check-label' %>
-    </div>
-    <div>
-      <%= f.radio_button :subscription_type, 'quarterly', class: 'form-check-input', required: true %>
-      <%= f.label :subscription_type_quarterly, t('labels.quarterly'), class: 'form-check-label' %>
-    </div>
-    <div>
-      <%= f.radio_button :subscription_type, 'semiannual', class: 'form-check-input', required: true %>
-      <%= f.label :subscription_type_semiannual, t('labels.semiannual'), class: 'form-check-label' %>
-    </div>
-  </div>
-
-  <div class="mb-3">
-    <%= f.submit @subscription.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

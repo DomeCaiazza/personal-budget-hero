@@ -1,13 +1,20 @@
-<div class="container my-3">
-  <div class="row">
-    <div class="col text-start">
-      <h1>Categories</h1>
-    </div>
-    <div class="col text-end">
-      <%= link_to 'Add new +', new_account_webapp_category_path(@account), class: 'btn btn-primary -btn-lg' %>
-    </div>
+<div class="w-full mb-6">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+    <h1 class="text-2xl font-bold text-gray-900">Categories</h1>
+    <%= link_to new_account_webapp_category_path(@account), class: 'btn btn-primary' do %>
+      <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add new
+    <% end %>
   </div>
-</div>
-<div class="container my-3">
-  <%= link_to 'Go to transactions', account_webapp_transactions_path(@account), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+  <div>
+    <%= link_to account_webapp_transactions_path(@account), 
+        class: 'text-blue-600 hover:text-blue-800 text-sm font-medium inline-flex items-center' do %>
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Go to transactions
+    <% end %>
+  </div>
 </div>

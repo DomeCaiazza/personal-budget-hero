@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-gray-50">
 <head>
   <title><%= content_for(:title) || "Personal Budget Hero" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,12 +18,17 @@
   <link rel="apple-touch-icon" href="/icon.png">
 
   <%# Includes all stylesheet files in app/assets/stylesheets %>
+  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_importmap_tags %>
 </head>
-<%= render "shared/header" %>
-<body>
-<%= render 'shared/flash_messages' %>
-<%= yield %>
+<body class="h-full bg-gray-50">
+  <%= render "shared/header" %>
+  <main class="min-h-screen pb-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <%= render 'shared/flash_messages' %>
+      <%= yield %>
+    </div>
+  </main>
 </body>
 </html>

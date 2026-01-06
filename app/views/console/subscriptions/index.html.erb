@@ -1,20 +1,29 @@
-<h2>Subscriptions</h2>
-<div class="text-end">
-  <%= link_to t('labels.new'), new_account_console_subscription_path, class: 'btn btn-sm btn-primary' %>
-</div>
+<div class="w-full mb-6">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+    <h2 class="text-2xl font-bold text-gray-900">Subscriptions</h2>
+    <%= link_to new_account_console_subscription_path, class: 'btn btn-primary' do %>
+      <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      <%= t('labels.new') %>
+    <% end %>
+  </div>
 
-<div class="table-responsive small">
-  <table class="table table-sm">
-    <thead>
-    <tr>
-      <th scope="col"><%= t('activerecord.attributes.subscription.description') %></th>
-      <th scope="col"><%= t('activerecord.attributes.subscription.default_amount') %></th>
-      <th scope="col"><%= t('activerecord.attributes.subscription.subscription_type') %></th>
-      <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%= render partial: 'console/subscriptions/subscription', collection: @subscriptions, as: :subscription %>
-    </tbody>
-  </table>
+  <div class="w-full bg-white shadow rounded-lg overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.subscription.description') %></th>
+            <th scope="col"><%= t('activerecord.attributes.subscription.default_amount') %></th>
+            <th scope="col"><%= t('activerecord.attributes.subscription.subscription_type') %></th>
+            <th scope="col" class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'console/subscriptions/subscription', collection: @subscriptions, as: :subscription %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

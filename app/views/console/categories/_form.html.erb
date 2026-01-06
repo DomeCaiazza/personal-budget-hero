@@ -1,41 +1,54 @@
-<%= form_for [:account_console, @category], class: 'mb-4' do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@category.errors.count, "error") %>:</h2>
-      <ul>
-        <% @category.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="w-full bg-white shadow rounded-lg p-6">
+  <%= form_for [:account_console, @category] do |f| %>
+    <% if @category.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger mb-6">
+        <h2 class="font-semibold mb-2"><%= pluralize(@category.errors.count, "error") %>:</h2>
+        <ul class="list-disc list-inside">
+          <% @category.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :name, "Nome", class: "form-label" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :hex_color, "Colore (HEX)", class: "form-label" %>
+      <div class="flex items-center gap-4">
+        <%= f.color_field :hex_color,
+                          class: "h-10 w-20 rounded border border-gray-300 cursor-pointer",
+                          value: f.object.hex_color || Faker::Color.hex_color %>
+        <div class="text-sm text-gray-500">Seleziona un colore per la categoria</div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="form-label"><%= t('activerecord.attributes.category.category_type') %></label>
+      <div class="mt-2 space-y-2">
+        <div class="flex items-center">
+          <%= f.radio_button :category_type, 'expenses', 
+              class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300', 
+              required: true %>
+          <%= f.label :category_type_expense, t('labels.expenses'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+        <div class="flex items-center">
+          <%= f.radio_button :category_type, 'incomes', 
+              class: 'h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300', 
+              required: true %>
+          <%= f.label :category_type_income, t('labels.incomes'), 
+              class: 'ml-2 block text-sm text-gray-900' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <%= f.submit @category.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
+      <%= link_to 'Cancel', account_console_categories_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
-
-  <div class="mb-3">
-    <%= f.label :name, "Nome", class: "form-label" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :hex_color, "Colore (HEX)", class: "form-label" %>
-    <%= f.color_field :hex_color,
-                      class: "form-control form-control-color",
-                      style: "width: 3rem; padding: 0;",
-                      value: f.object.hex_color || Faker::Color.hex_color %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :category_type, t('activerecord.attributes.category.category_type'), class: 'form-label' %>
-    <div>
-      <%= f.radio_button :category_type, 'expenses', class: 'form-check-input', required: true %>
-      <%= f.label :category_type_expense, t('labels.expenses'), class: 'form-check-label' %>
-    </div>
-    <div>
-      <%= f.radio_button :category_type, 'incomes', class: 'form-check-input', required: true %>
-      <%= f.label :category_type_income, t('labels.incomes'), class: 'form-check-label' %>
-    </div>
-  </div>
-
-  <div class="mb-3">
-    <%= f.submit @category.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

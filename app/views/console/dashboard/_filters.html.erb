@@ -1,16 +1,15 @@
-<h5>Search</h5>
-<%= search_form_for @q, url: account_console_dashboard_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
-  <div class="row">
-    <div class="col-sm-6 form-group has-feedback">
-      <%= f.label :date_eq, 'Year', class: 'control-label' %>
-      <%= f.select :date_eq, options_for_select(((@account.transactions&.order(:date)&.first&.date&.year || Date.today.year)..Date.today.year).to_a.reverse), {}, class: 'form-control' %>
+<div class="w-full bg-white shadow rounded-lg p-6 mb-6">
+  <h3 class="text-lg font-semibold text-gray-900 mb-4">Filter by Year</h3>
+  <%= search_form_for @q, url: account_console_dashboard_path, html: { role: 'search', id: 'search-box', class: 'filter-active' } do |f| %>
+    <div class="flex gap-4 items-end">
+      <div class="flex-1 max-w-xs">
+        <%= f.label :date_eq, 'Year', class: 'form-label' %>
+        <%= f.select :date_eq, options_for_select(((@account.transactions&.order(:date)&.first&.date&.year || Date.today.year)..Date.today.year).to_a.reverse), {}, class: 'form-control' %>
+      </div>
+      <div class="flex gap-2">
+        <%= f.submit 'Search', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', request.path, class: 'btn btn-secondary' %>
+      </div>
     </div>
-    <div class="col-sm-3 form-group has-feedback">
-
-    </div>
-  </div>
-  <br>
-  <%= f.submit 'Search', class: 'btn btn-outline-primary' %>
-  <%= link_to 'Cancel', request.path, class: 'btn btn-white' %>
-<% end %>
-<hr>
+  <% end %>
+</div>

@@ -1,43 +1,46 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-  <div class="position-sticky pt-3 sidebar-sticky">
+<!-- Mobile menu overlay -->
+<div class="fixed inset-0 z-40 lg:hidden hidden" data-menu-target="overlay" data-action="click->menu#close">
+  <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+</div>
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-      <span>ITEMS</span>
-      <a class="link-secondary" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle" class="align-text-bottom"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to account_console_dashboard_path, class: 'nav-link' do %>
-          <i class="fe fe-user"></i>
+<!-- Sidebar -->
+<aside class="fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-gray-200 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:inset-0 flex-shrink-0" 
+       data-menu-target="menu">
+  <div class="flex flex-col h-full">
+    <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+      <nav class="mt-5 flex-1 px-2 space-y-1">
+        <%= link_to account_console_dashboard_path, 
+            class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md #{request.path == account_console_dashboard_path ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}" do %>
+          <svg class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
           Dashboard
         <% end %>
-      </li>
-    </ul>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to account_console_transactions_path, class: 'nav-link' do %>
-          <i class="fe fe-money"></i>
+
+        <%= link_to account_console_transactions_path, 
+            class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md #{request.path.include?('transactions') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}" do %>
+          <svg class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           Transactions
         <% end %>
-      </li>
-    </ul>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to account_console_subscriptions_path, class: 'nav-link' do %>
-          <i class="fe fe-star"></i>
+
+        <%= link_to account_console_subscriptions_path, 
+            class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md #{request.path.include?('subscriptions') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}" do %>
+          <svg class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
           Subscriptions
         <% end %>
-      </li>
-    </ul>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to account_console_categories_path, class: 'nav-link' do %>
-          <i class="fe fe-list-bullet"></i>
+
+        <%= link_to account_console_categories_path, 
+            class: "group flex items-center px-2 py-2 text-sm font-medium rounded-md #{request.path.include?('categories') ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}" do %>
+          <svg class="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
           Categories
         <% end %>
-      </li>
-    </ul>
+      </nav>
+    </div>
   </div>
-</nav>
+</aside>

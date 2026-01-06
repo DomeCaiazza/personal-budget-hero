@@ -1,5 +1,6 @@
-<h2>Edit <%= @transaction.transaction_type.capitalize %></h2>
-
-<%= render 'form', transaction: @transaction %>
-
-<%= link_to link_to t('labels.back'), account_console_transactions_path %>
+<div class="w-full mb-6">
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">
+    Edit <%= @transaction.transaction_type.capitalize %>
+  </h2>
+  <%= render 'form', transaction: @transaction %>
+</div>

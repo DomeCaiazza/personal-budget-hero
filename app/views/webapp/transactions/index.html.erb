@@ -1,23 +1,43 @@
-<div class="container my-3">
-  <div class="row">
-    <div class="col text-start">
-      <h1>Transactions</h1>
+<div class="w-full">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 mb-2">Transactions</h1>
+      <%= link_to account_webapp_categories_path(@account), 
+          class: 'text-sm text-gray-600 hover:text-blue-600 font-medium inline-flex items-center transition-colors' do %>
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        Manage categories
+      <% end %>
     </div>
-    <div class="col text-end">
-      <%= link_to t('activerecord.labels.transaction.new_income'), new_account_webapp_transaction_path(@account, transaction_type: 'income'), class: 'btn btn-success -btn-lg' %>
-      <%= link_to t('activerecord.labels.transaction.new_expense'), new_account_webapp_transaction_path(@account, transaction_type: 'expense'), class: 'btn btn-danger -btn-lg' %>
+    <div class="flex gap-2 flex-wrap">
+      <%= link_to new_account_webapp_transaction_path(@account, transaction_type: 'income'), 
+          class: 'btn btn-success flex items-center justify-center' do %>
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <%= t('activerecord.labels.transaction.new_income') %>
+      <% end %>
+      <%= link_to new_account_webapp_transaction_path(@account, transaction_type: 'expense'), 
+          class: 'btn btn-danger flex items-center justify-center' do %>
+        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+        </svg>
+        <%= t('activerecord.labels.transaction.new_expense') %>
+      <% end %>
     </div>
   </div>
-</div>
-<div class="container my-3">
-  <%= link_to 'Go to categories', account_webapp_categories_path(@account), class: 'link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
-</div>
-<div class="container my-3">
-  <% if @transactions.any? %>
-    <%= render partial: 'webapp/transactions/transaction_card', collection: @transactions, as: :transaction %>
-  <% else %>
-    <div class="alert alert-info" role="alert">
-      <%= t('labels.no_transactions') %>
-    </div>
-  <% end %>
+  
+  <div class="space-y-2">
+    <% if @transactions.any? %>
+      <%= render partial: 'webapp/transactions/transaction_card', collection: @transactions, as: :transaction %>
+    <% else %>
+      <div class="alert alert-info text-center py-8" role="alert">
+        <svg class="w-12 h-12 mx-auto mb-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <p class="text-gray-600"><%= t('labels.no_transactions') %></p>
+      </div>
+    <% end %>
+  </div>
 </div>
