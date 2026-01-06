@@ -140,7 +140,7 @@ RSpec.describe Console::CategoriesController, type: :controller do
           it 'redirects to the categories path with a success message' do
             delete :destroy, params: { account_id: account.id, id: category.id }
             expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
-            expect(flash[:success]).to eq(I18n.t("labels.record_destroyed"))
+            expect(flash[:success]).to eq(I18n.t("controllers.console.categories.destroy.success"))
           end
         end
 
@@ -149,7 +149,7 @@ RSpec.describe Console::CategoriesController, type: :controller do
             create(:transaction, account: account, category: category)
             delete :destroy, params: { account_id: account.id, id: category.id }
             expect(response).to redirect_to(account_console_categories_path(account_id: account.id))
-            expect(flash[:danger]).to include(I18n.t("labels.error_record_destroyed"))
+            expect(flash[:danger]).to include(I18n.t("controllers.console.categories.destroy.error"))
           end
         end
 

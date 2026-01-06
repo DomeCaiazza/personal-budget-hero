@@ -155,6 +155,9 @@ en:
     annual: Annual
     semiannual: Semi-Annual
     quarterly: Quarterly
+    record_destroyed: Record deleted successfully
+    error_record_destroyed: Error deleting record
+    not_authorized: You are not authorized to access this resource
   # Controllers flash messages
   controllers:
     console:
@@ -259,6 +262,7 @@ en:
           transactions: Transactions
           subscriptions: Subscriptions
           categories: Categories
+          change_account: Change account
     webapp:
       transactions:
         index:
@@ -314,3 +318,12 @@ en:
           other: "Found &nbsp<b>%{count}</b>&nbsp %{entry_name}"
       more_pages:
         display_entries: "Found %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> total"
+  activerecord:
+    errors:
+      models:
+        account:
+          attributes:
+            name:
+              blank: can't be blank
+      messages:
+        blank: can't be blank

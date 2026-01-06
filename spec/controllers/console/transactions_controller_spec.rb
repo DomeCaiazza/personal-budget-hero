@@ -147,7 +147,7 @@ RSpec.describe Console::TransactionsController, type: :controller do
       it 'redirects to the transactions path with a success message' do
         delete :destroy, params: { account_id: account.id, id: transaction.id }
         expect(response).to redirect_to(account_console_transactions_path(account_id: account.id))
-        expect(flash[:success]).to eq(I18n.t("labels.record_destroyed"))
+        expect(flash[:success]).to eq(I18n.t("controllers.console.transactions.destroy.success"))
       end
     end
 
@@ -159,7 +159,7 @@ RSpec.describe Console::TransactionsController, type: :controller do
       it 'redirects to the transactions path with an error message' do
         delete :destroy, params: { account_id: account.id, id: transaction.id }
         expect(response).to redirect_to(account_console_transactions_path(account_id: account.id))
-        expect(flash[:danger]).to include(I18n.t("labels.error_record_destroyed"))
+        expect(flash[:danger]).to include(I18n.t("controllers.console.transactions.destroy.error"))
       end
     end
 

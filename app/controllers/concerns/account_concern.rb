@@ -12,6 +12,10 @@ module AccountConcern
       redirect_to accounts_path
       return
     end
-    @account = current_user.accounts.find(params[:account_id])
+
+    @account = Account.find(params[:account_id])
+    authorize @account, :show?
+  rescue ActiveRecord::RecordNotFound
+    raise Pundit::NotAuthorizedError
   end
 end

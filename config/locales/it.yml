@@ -155,6 +155,9 @@ it:
     annual: Annuale
     semiannual: Semestrale
     quarterly: Trimestrale
+    record_destroyed: Record eliminato con successo
+    error_record_destroyed: Errore nell'eliminazione del record
+    not_authorized: Non hai l'autorizzazione per accedere a questa risorsa
   # Messaggi flash dei controller
   controllers:
     console:
@@ -259,6 +262,7 @@ it:
           transactions: Transazioni
           subscriptions: Abbonamenti
           categories: Categorie
+          change_account: Cambia account
     webapp:
       transactions:
         index:
@@ -386,4 +390,13 @@ it:
           other: "Trovati &nbsp<b>%{count}</b>&nbsp %{entry_name}"
       more_pages:
         display_entries: "Trovati %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> di <b>%{total}</b> totali"
+  activerecord:
+    errors:
+      models:
+        account:
+          attributes:
+            name:
+              blank: non può essere vuoto
+      messages:
+        blank: non può essere vuoto
 

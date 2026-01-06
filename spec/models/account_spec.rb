@@ -43,7 +43,7 @@ RSpec.describe Account, type: :model do
     it 'is invalid without a name' do
       account = build(:account, name: nil)
       expect(account).not_to be_valid
-      expect(account.errors[:name]).to include("can't be blank")
+      expect(account.errors[:name]).to include(I18n.t('activerecord.errors.models.account.attributes.name.blank'))
     end
 
     it 'is invalid with an empty name' do

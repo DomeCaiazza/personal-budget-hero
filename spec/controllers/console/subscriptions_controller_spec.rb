@@ -106,7 +106,7 @@ describe Console::SubscriptionsController, type: :controller do
       it "redirects to the subscriptions list with error message" do
         delete :destroy, params: { account_id: account.id, id: subscription.id }
         expect(response).to redirect_to(account_console_subscriptions_path(account_id: account.id))
-        expect(flash[:danger]).to eq("<b>#{I18n.t('labels.error_record_destroyed')}</b>: ")
+        expect(flash[:danger]).to include(I18n.t("controllers.console.subscriptions.destroy.error"))
       end
     end
   end
