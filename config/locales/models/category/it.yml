@@ -1,0 +1,17 @@
+it:
+  activerecord:
+    models:
+      category:
+        one: Categoria
+        other: Categorie
+    attributes:
+      category:
+        name: Nome
+        hex_color: Colore
+        category_type: Tipo
+    enums:
+      category:
+        category_type:
+          expenses: Spese
+          incomes: Entrate
+

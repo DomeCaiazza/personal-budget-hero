@@ -1,0 +1,38 @@
+<% content_for :title, t("views.devise.passwords.new.title") %>
+<% content_for :subtitle, t("views.devise.passwords.new.subtitle") %>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-6 text-center"><%= t("views.devise.passwords.new.title") %>?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-6" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="text-sm text-gray-600 mb-4">
+    <%= t("views.devise.passwords.new.instructions") %>
+  </div>
+
+  <div>
+    <%= f.label :email, t("views.devise.passwords.new.email"), class: "form-label" %>
+    <%= f.email_field :email, 
+        autofocus: true, 
+        autocomplete: "email",
+        class: "form-control",
+        placeholder: t("views.devise.passwords.new.email_placeholder"),
+        required: true %>
+  </div>
+
+  <div>
+    <%= f.submit t("views.devise.passwords.new.submit"), class: "btn btn-primary w-full" %>
+  </div>
+<% end %>
+
+<div class="mt-6 text-center">
+  <%= link_to t("views.devise.passwords.new.sign_in"), new_session_path(resource_name), 
+      class: "text-sm text-blue-600 hover:text-blue-800" %>
+</div>
+
+<div class="mt-2 text-center">
+  <span class="text-sm text-gray-600"><%= t("views.devise.passwords.new.no_account") %> </span>
+  <%= link_to t("views.devise.passwords.new.sign_up"), new_registration_path(resource_name), 
+      class: "text-sm font-medium text-blue-600 hover:text-blue-800" %>
+</div>
+

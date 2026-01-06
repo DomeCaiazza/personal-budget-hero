@@ -1,0 +1,66 @@
+# Traduzioni aggiuntive su https://github.com/heartcombo/devise/wiki/I18n
+
+it:
+  devise:
+    confirmations:
+      confirmed: "Il tuo indirizzo email è stato confermato con successo."
+      send_instructions: "Riceverai un'email con le istruzioni per confermare il tuo indirizzo email tra pochi minuti."
+      send_paranoid_instructions: "Se il tuo indirizzo email esiste nel nostro database, riceverai un'email con le istruzioni per confermare il tuo indirizzo email tra pochi minuti."
+    failure:
+      already_authenticated: "Sei già autenticato."
+      inactive: "Il tuo account non è ancora attivato."
+      invalid: "Email o password non validi."
+      locked: "Il tuo account è bloccato."
+      last_attempt: "Hai ancora un tentativo prima che il tuo account venga bloccato."
+      not_found_in_database: "Email o password non validi."
+      timeout: "La tua sessione è scaduta. Accedi di nuovo per continuare."
+      unauthenticated: "Devi accedere o registrarti prima di continuare."
+      unconfirmed: "Devi confermare il tuo indirizzo email prima di continuare."
+    mailer:
+      confirmation_instructions:
+        subject: "Istruzioni di conferma"
+      reset_password_instructions:
+        subject: "Istruzioni per reimpostare la password"
+      unlock_instructions:
+        subject: "Istruzioni per sbloccare l'account"
+      email_changed:
+        subject: "Email modificata"
+      password_change:
+        subject: "Password modificata"
+    omniauth_callbacks:
+      failure: "Impossibile autenticarti da %{kind} perché \"%{reason}\"."
+      success: "Autenticazione riuscita dall'account %{kind}."
+    passwords:
+      no_token: "Non puoi accedere a questa pagina senza arrivare da un'email di reset password. Se provieni da un'email di reset password, assicurati di aver utilizzato l'URL completo fornito."
+      send_instructions: "Riceverai un'email con le istruzioni su come reimpostare la tua password tra pochi minuti."
+      send_paranoid_instructions: "Se il tuo indirizzo email esiste nel nostro database, riceverai un link di recupero password al tuo indirizzo email tra pochi minuti."
+      updated: "La tua password è stata modificata con successo. Ora sei autenticato."
+      updated_not_active: "La tua password è stata modificata con successo."
+    registrations:
+      destroyed: "Arrivederci! Il tuo account è stato cancellato con successo. Speriamo di rivederti presto."
+      signed_up: "Benvenuto! Ti sei registrato con successo."
+      signed_up_but_inactive: "Ti sei registrato con successo. Tuttavia, non possiamo autenticarti perché il tuo account non è ancora attivato."
+      signed_up_but_locked: "Ti sei registrato con successo. Tuttavia, non possiamo autenticarti perché il tuo account è bloccato."
+      signed_up_but_unconfirmed: "È stato inviato un messaggio con un link di conferma al tuo indirizzo email. Segui il link per attivare il tuo account."
+      update_needs_confirmation: "Hai aggiornato il tuo account con successo, ma dobbiamo verificare il tuo nuovo indirizzo email. Controlla la tua email e segui il link di conferma per confermare il tuo nuovo indirizzo email."
+      updated: "Il tuo account è stato aggiornato con successo."
+      updated_but_not_signed_in: "Il tuo account è stato aggiornato con successo, ma poiché la password è stata modificata, devi accedere di nuovo."
+    sessions:
+      signed_in: "Accesso effettuato con successo."
+      signed_out: "Disconnessione effettuata con successo."
+      already_signed_out: "Disconnessione effettuata con successo."
+    unlocks:
+      send_instructions: "Riceverai un'email con le istruzioni per sbloccare il tuo account tra pochi minuti."
+      send_paranoid_instructions: "Se il tuo account esiste, riceverai un'email con le istruzioni per sbloccarlo tra pochi minuti."
+      unlocked: "Il tuo account è stato sbloccato con successo. Accedi per continuare."
+  errors:
+    messages:
+      already_confirmed: "è già stato confermato, prova ad accedere"
+      confirmation_period_expired: "deve essere confermato entro %{period}, richiedine uno nuovo"
+      expired: "è scaduto, richiedine uno nuovo"
+      not_found: "non trovato"
+      not_locked: "non era bloccato"
+      not_saved:
+        one: "1 errore ha impedito il salvataggio di questo %{resource}:"
+        other: "%{count} errori hanno impedito il salvataggio di questo %{resource}:"
+

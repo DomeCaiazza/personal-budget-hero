@@ -1,0 +1,75 @@
+<% content_for :title, t("views.devise.registrations.edit.title") %>
+<% content_for :subtitle, t("views.devise.registrations.edit.subtitle") %>
+
+<h2 class="text-2xl font-bold text-gray-900 mb-6 text-center"><%= t("views.devise.registrations.edit.title") %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div>
+    <%= f.label :email, t("views.devise.registrations.edit.email"), class: "form-label" %>
+    <%= f.email_field :email, 
+        autofocus: true, 
+        autocomplete: "email",
+        class: "form-control",
+        required: true %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="alert alert-info">
+      <p><%= t("views.devise.registrations.edit.pending_confirmation", email: resource.unconfirmed_email) %></p>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :password, t("views.devise.registrations.edit.new_password"), class: "form-label" %>
+    <span class="text-xs text-gray-500"><%= t("views.devise.registrations.edit.password_leave_blank") %></span>
+    <% if @minimum_password_length %>
+      <span class="text-xs text-gray-500"><%= t("views.devise.registrations.edit.password_minimum", count: @minimum_password_length) %></span>
+    <% end %>
+    <%= f.password_field :password, 
+        autocomplete: "new-password",
+        class: "form-control",
+        placeholder: t("views.devise.registrations.edit.password_placeholder") %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation, t("views.devise.registrations.edit.password_confirmation"), class: "form-label" %>
+    <%= f.password_field :password_confirmation, 
+        autocomplete: "new-password",
+        class: "form-control",
+        placeholder: t("views.devise.registrations.edit.password_confirmation_placeholder") %>
+  </div>
+
+  <div>
+    <%= f.label :current_password, t("views.devise.registrations.edit.current_password"), class: "form-label" %>
+    <span class="text-xs text-gray-500"><%= t("views.devise.registrations.edit.current_password_required") %></span>
+    <%= f.password_field :current_password, 
+        autocomplete: "current-password",
+        class: "form-control",
+        placeholder: t("views.devise.registrations.edit.current_password_placeholder"),
+        required: true %>
+  </div>
+
+  <div class="flex gap-2">
+    <%= f.submit t("views.devise.registrations.edit.submit"), class: "btn btn-primary flex-1" %>
+    <%= link_to t("views.devise.registrations.edit.cancel"), :back, class: "btn btn-secondary" %>
+  </div>
+<% end %>
+
+<div class="mt-6 pt-6 border-t border-gray-200">
+  <h3 class="text-lg font-semibold text-gray-900 mb-4"><%= t("views.devise.registrations.edit.delete_account_title") %></h3>
+  <p class="text-sm text-gray-600 mb-4">
+    <%= t("views.devise.registrations.edit.delete_account_message") %>
+  </p>
+  <%= button_to t("views.devise.registrations.edit.delete_account_button"), 
+      registration_path(resource_name), 
+      data: { confirm: t("labels.confirm_delete"), turbo_confirm: t("labels.confirm_delete") },
+      method: :delete,
+      class: "btn btn-danger" %>
+</div>
+
+<div class="mt-4 text-center">
+  <%= link_to t("views.devise.registrations.edit.back"), :back, class: "text-sm text-blue-600 hover:text-blue-800" %>
+</div>
+

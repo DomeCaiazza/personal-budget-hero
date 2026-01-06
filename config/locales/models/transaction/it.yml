@@ -1,0 +1,26 @@
+it:
+  activerecord:
+    models:
+      transaction:
+        one: Transazione
+        other: Transazioni
+    attributes:
+      transaction:
+        description: Descrizione
+        amount: Importo
+        date: Data
+        paid: Pagato
+        fixed: Fisso
+        transaction_type: Tipo
+        created_at: Creato il
+        updated_at: Aggiornato il
+        user_id: Utente
+        category_id: Categoria
+    labels:
+      transaction:
+        income: Entrata
+        expense: Spesa
+        new_income: Aggiungi nuova entrata
+        new_expense: Aggiungi nuova spesa
+        apply_subscriptions: Applica abbonamenti
+

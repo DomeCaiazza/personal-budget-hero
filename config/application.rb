@@ -23,5 +23,9 @@ module PersonalBudgetHero
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # Imposta l'italiano come lingua di default
+    config.i18n.default_locale = :it
+    config.i18n.available_locales = [:it, :en]
   end
 end

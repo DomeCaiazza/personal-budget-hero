@@ -1,0 +1,19 @@
+it:
+  activerecord:
+    models:
+      subscription:
+        one: Abbonamento
+        other: Abbonamenti
+    attributes:
+      subscription:
+        description: Descrizione
+        default_amount: Importo Predefinito
+        subscription_type: Tipo
+    enums:
+      subscription:
+        subscription_type:
+          monthly: Mensile
+          quarterly: Trimestrale
+          semiannual: Semestrale
+          annual: Annuale
+
