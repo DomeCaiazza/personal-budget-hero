@@ -1,13 +1,13 @@
 <div class="w-full">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900 mb-2">Transactions</h1>
+      <h1 class="text-2xl font-bold text-gray-900 mb-2"><%= t("views.webapp.transactions.index.title") %></h1>
       <%= link_to account_webapp_categories_path(@account), 
           class: 'text-sm text-gray-600 hover:text-blue-600 font-medium inline-flex items-center transition-colors' do %>
         <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        Manage categories
+        <%= t("views.webapp.transactions.index.manage_categories") %>
       <% end %>
     </div>
     <div class="flex gap-2 flex-wrap">

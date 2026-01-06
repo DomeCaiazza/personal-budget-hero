@@ -13,24 +13,24 @@
       <% end %>
 
       <div class="mb-6">
-        <%= f.label :name, class: 'form-label' %>
+        <%= f.label :name, t('activerecord.attributes.category.name'), class: 'form-label' %>
         <%= f.text_field :name,
                          class: 'form-control text-lg',
                          autofocus: true,
                          required: true,
                          enterkeyhint: 'next',
-                         placeholder: 'Category name' %>
+                         placeholder: t('views.webapp.categories._form.placeholder_name') %>
       </div>
 
       <div class="mb-6">
-        <%= f.label :hex_color, "Color", class: 'form-label' %>
+        <%= f.label :hex_color, t('activerecord.attributes.category.hex_color'), class: 'form-label' %>
         <div class="flex items-center gap-4">
           <%= f.color_field :hex_color,
                             class: 'h-16 w-20 rounded-lg border-2 border-gray-300 cursor-pointer',
                             required: true,
                             value: f.object.hex_color || Faker::Color.hex_color,
                             enterkeyhint: 'next' %>
-          <div class="text-sm text-gray-500">Select a color for this category</div>
+          <div class="text-sm text-gray-500"><%= t("views.webapp.categories._form.select_color") %></div>
         </div>
       </div>
 
@@ -41,22 +41,22 @@
             <%= f.radio_button :category_type, 'expenses', 
                 class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300', 
                 required: true %>
-            <%= f.label :category_type_expense, t('labels.expenses'), 
+            <%= f.label :category_type_expenses, t('activerecord.enums.category.category_type.expenses'), 
                 class: 'ml-2 block text-sm text-gray-900' %>
           </div>
           <div class="flex items-center">
             <%= f.radio_button :category_type, 'incomes', 
                 class: 'h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300', 
                 required: true %>
-            <%= f.label :category_type_income, t('labels.incomes'), 
+            <%= f.label :category_type_incomes, t('activerecord.enums.category.category_type.incomes'), 
                 class: 'ml-2 block text-sm text-gray-900' %>
           </div>
         </div>
       </div>
 
       <div class="flex gap-2">
-        <%= f.submit 'Save', class: 'btn btn-primary btn-lg flex-1' %>
-        <%= link_to 'Cancel', account_webapp_categories_path(@account), class: 'btn btn-secondary btn-lg' %>
+        <%= f.submit t('labels.save'), class: 'btn btn-primary btn-lg flex-1' %>
+        <%= link_to t('labels.cancel'), account_webapp_categories_path(@account), class: 'btn btn-secondary btn-lg' %>
       </div>
     <% end %>
   </div>

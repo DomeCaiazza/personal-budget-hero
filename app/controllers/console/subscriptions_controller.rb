@@ -22,8 +22,9 @@ class Console::SubscriptionsController < ConsoleController
     @subscription = @account.subscriptions.build(subscription_params)
     authorize @subscription
     if @subscription.save
-      redirect_to account_console_subscriptions_path, notice: t("labels.record_created")
+      redirect_to account_console_subscriptions_path, notice: t("controllers.console.subscriptions.create.success")
     else
+      flash.now[:danger] = t("controllers.console.subscriptions.create.error")
       render :new
     end
   end
@@ -31,8 +32,9 @@ class Console::SubscriptionsController < ConsoleController
   def update
     authorize @subscription
     if @subscription.update(subscription_params)
-      redirect_to account_console_subscriptions_path, notice: t("labels.record_modified")
+      redirect_to account_console_subscriptions_path, notice: t("controllers.console.subscriptions.update.success")
     else
+      flash.now[:danger] = t("controllers.console.subscriptions.update.error")
       render :edit
     end
   end
@@ -41,10 +43,10 @@ class Console::SubscriptionsController < ConsoleController
     policy_scope(@subscription)
     authorize @subscription
     if @subscription.destroy
-      flash[:success] = t("labels.record_destroyed")
+      flash[:success] = t("controllers.console.subscriptions.destroy.success")
       redirect_to account_console_subscriptions_path
     else
-      flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@subscription.errors.full_messages.join(". ")}"
+      flash[:danger] = "#{t('controllers.console.subscriptions.destroy.error')}: #{@subscription.errors.full_messages.join(". ")}"
       redirect_to account_console_subscriptions_path
     end
   end

@@ -9,3 +9,8 @@ en:
         name: Name
         hex_color: Color
         category_type: Type
+    enums:
+      category:
+        category_type:
+          expenses: Expenses
+          incomes: Incomes

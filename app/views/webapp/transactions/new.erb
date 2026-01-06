@@ -6,8 +6,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
       <span class="text-xl font-semibold">
-        New <%= @transaction_type.present? ? t("activerecord.labels.transaction.#{@transaction_type}") :
-                  t("activerecord.models.transaction.one") %>
+        <%= t("views.webapp.transactions.new.title") %>
       </span>
     <% end %>
   </div>

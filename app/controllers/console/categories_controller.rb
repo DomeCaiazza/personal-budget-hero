@@ -6,8 +6,9 @@ class Console::CategoriesController < ConsoleController
     @category = @account.categories.build(category_params)
     authorize @category
     if @category.save
-      redirect_to account_console_categories_path(@account), notice: t("labels.record_created")
+      redirect_to account_console_categories_path(@account), notice: t("controllers.console.categories.create.success")
     else
+      flash.now[:danger] = t("controllers.console.categories.create.error")
       render :new
     end
   end
@@ -15,8 +16,9 @@ class Console::CategoriesController < ConsoleController
   def update
     authorize @category
     if @category.update(category_params)
-      redirect_to account_console_categories_path, notice: t("labels.record_modified")
+      redirect_to account_console_categories_path, notice: t("controllers.console.categories.update.success")
     else
+      flash.now[:danger] = t("controllers.console.categories.update.error")
       render :edit
     end
   end
@@ -25,10 +27,10 @@ class Console::CategoriesController < ConsoleController
     policy_scope(@category)
     authorize @category
     if @category.destroy
-      flash[:success] = t("labels.record_destroyed")
+      flash[:success] = t("controllers.console.categories.destroy.success")
       redirect_to account_console_categories_path
     else
-      flash[:danger] = "<b>#{t('labels.error_record_destroyed')}</b>: #{@category.errors.full_messages.join(". ")}"
+      flash[:danger] = "#{t('controllers.console.categories.destroy.error')}: #{@category.errors.full_messages.join(". ")}"
       redirect_to account_console_categories_path
     end
   end

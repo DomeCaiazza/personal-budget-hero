@@ -8,10 +8,10 @@ class Webapp::CategoriesController < WebappController
     authorize @category
 
     if @category.save
-      flash[:success] = t("labels.record_created")
-      redirect_to account_webapp_categories_path(@account), success: t("labels.record_created")
+      flash[:success] = t("controllers.webapp.categories.create.success")
+      redirect_to account_webapp_categories_path(@account), success: t("controllers.webapp.categories.create.success")
     else
-      flash[:danger] = @category.errors.full_messages.join("<br>").html_safe
+      flash.now[:danger] = "#{t('controllers.webapp.categories.create.error')}: #{@category.errors.full_messages.join("<br>")}".html_safe
       render :new, status: :unprocessable_entity
     end
   end
@@ -19,8 +19,9 @@ class Webapp::CategoriesController < WebappController
   def update
     authorize(@category)
     if @category.update(category_params)
-      redirect_to account_webapp_categories_path(@account), notice: t("labels.record_modified")
+      redirect_to account_webapp_categories_path(@account), notice: t("controllers.webapp.categories.update.success")
     else
+      flash.now[:danger] = t("controllers.webapp.categories.update.error")
       render :edit
     end
   end

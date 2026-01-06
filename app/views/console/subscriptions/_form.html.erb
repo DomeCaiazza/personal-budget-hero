@@ -17,7 +17,7 @@
     </div>
 
     <div class="mb-4">
-      <%= f.label :default_amount, class: 'form-label' %>
+      <%= f.label :default_amount, t('activerecord.attributes.subscription.default_amount'), class: 'form-label' %>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <span class="text-gray-500 sm:text-sm">€</span>
@@ -38,28 +38,28 @@
           <%= f.radio_button :subscription_type, 'monthly', 
               class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
               required: true %>
-          <%= f.label :subscription_type_monthly, t('labels.monthly'), 
+          <%= f.label :subscription_type_monthly, t('activerecord.enums.subscription.subscription_type.monthly'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
         <div class="flex items-center">
           <%= f.radio_button :subscription_type, 'annual', 
               class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
               required: true %>
-          <%= f.label :subscription_type_annual, t('labels.annual'), 
+          <%= f.label :subscription_type_annual, t('activerecord.enums.subscription.subscription_type.annual'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
         <div class="flex items-center">
           <%= f.radio_button :subscription_type, 'quarterly', 
               class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
               required: true %>
-          <%= f.label :subscription_type_quarterly, t('labels.quarterly'), 
+          <%= f.label :subscription_type_quarterly, t('activerecord.enums.subscription.subscription_type.quarterly'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
         <div class="flex items-center">
           <%= f.radio_button :subscription_type, 'semiannual', 
               class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300', 
               required: true %>
-          <%= f.label :subscription_type_semiannual, t('labels.semiannual'), 
+          <%= f.label :subscription_type_semiannual, t('activerecord.enums.subscription.subscription_type.semiannual'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
       </div>
@@ -67,7 +67,7 @@
 
     <div class="flex gap-2">
       <%= f.submit @subscription.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
-      <%= link_to 'Cancel', account_console_subscriptions_path, class: 'btn btn-secondary' %>
+      <%= link_to t("labels.cancel"), account_console_subscriptions_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 </div>

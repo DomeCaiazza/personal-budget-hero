@@ -24,7 +24,7 @@
                    class: 'form-control' %>
       <div class="mt-2">
         <%= link_to account_console_categories_path, class: 'text-sm text-blue-600 hover:text-blue-800' do %>
-          Manage categories →
+          <%= t("views.console.transactions._form.manage_categories") %>
         <% end %>
       </div>
     </div>
@@ -35,11 +35,11 @@
                        class: 'form-control',
                        autocomplete: 'off',
                        data: { field: :title },
-                       placeholder: 'e.g. coffee with colleagues',
+                       placeholder: t("views.console.transactions._form.placeholder_description"),
                        required: true %>
       <div class="mt-2 flex gap-2">
-        <button type="button" data-controller="transactions" data-action="click->transactions#setDateField" data-transactions-day="yesterday" class="btn btn-sm btn-secondary">Yesterday</button>
-        <button type="button" data-controller="transactions" data-action="click->transactions#setDateField" data-transactions-day="today" class="btn btn-sm btn-secondary">Today</button>
+        <button type="button" data-controller="transactions" data-action="click->transactions#setDateField" data-transactions-day="yesterday" class="btn btn-sm btn-secondary"><%= t("labels.yesterday") %></button>
+        <button type="button" data-controller="transactions" data-action="click->transactions#setDateField" data-transactions-day="today" class="btn btn-sm btn-secondary"><%= t("labels.today") %></button>
       </div>
     </div>
 
@@ -90,7 +90,7 @@
 
     <div class="flex gap-2">
       <%= f.submit @transaction.new_record? ? t('labels.save') : t('labels.update'), class: "btn btn-primary" %>
-      <%= link_to 'Cancel', account_console_transactions_path, class: 'btn btn-secondary' %>
+      <%= link_to t("labels.cancel"), account_console_transactions_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 </div>

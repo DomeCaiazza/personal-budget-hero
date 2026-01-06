@@ -12,17 +12,17 @@
     <% end %>
 
     <div class="mb-4">
-      <%= f.label :name, "Nome", class: "form-label" %>
+      <%= f.label :name, t("activerecord.attributes.category.name"), class: "form-label" %>
       <%= f.text_field :name, class: "form-control" %>
     </div>
 
     <div class="mb-4">
-      <%= f.label :hex_color, "Colore (HEX)", class: "form-label" %>
+      <%= f.label :hex_color, t("activerecord.attributes.category.hex_color"), class: "form-label" %>
       <div class="flex items-center gap-4">
         <%= f.color_field :hex_color,
                           class: "h-10 w-20 rounded border border-gray-300 cursor-pointer",
                           value: f.object.hex_color || Faker::Color.hex_color %>
-        <div class="text-sm text-gray-500">Seleziona un colore per la categoria</div>
+        <div class="text-sm text-gray-500"><%= t("views.console.categories._form.select_color") %></div>
       </div>
     </div>
 
@@ -33,14 +33,14 @@
           <%= f.radio_button :category_type, 'expenses', 
               class: 'h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300', 
               required: true %>
-          <%= f.label :category_type_expense, t('labels.expenses'), 
+          <%= f.label :category_type_expenses, t('activerecord.enums.category.category_type.expenses'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
         <div class="flex items-center">
           <%= f.radio_button :category_type, 'incomes', 
               class: 'h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300', 
               required: true %>
-          <%= f.label :category_type_income, t('labels.incomes'), 
+          <%= f.label :category_type_incomes, t('activerecord.enums.category.category_type.incomes'), 
               class: 'ml-2 block text-sm text-gray-900' %>
         </div>
       </div>
@@ -48,7 +48,7 @@
 
     <div class="flex gap-2">
       <%= f.submit @category.new_record? ? t('labels.new') : t('labels.update'), class: "btn btn-primary" %>
-      <%= link_to 'Cancel', account_console_categories_path, class: 'btn btn-secondary' %>
+      <%= link_to t("labels.cancel"), account_console_categories_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 </div>

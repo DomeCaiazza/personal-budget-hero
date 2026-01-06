@@ -17,9 +17,9 @@ en:
         user_id: User
         category_id: Category
     labels:
-        transaction:
-            income: Income
-            expense: Expense
-            new_income: Add new income
-            new_expense: Add new expense
-            apply_subscriptions: Apply subscriptions
+      transaction:
+        income: Income
+        expense: Expense
+        new_income: Add new income
+        new_expense: Add new expense
+        apply_subscriptions: Apply subscriptions

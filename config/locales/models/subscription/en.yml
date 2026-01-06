@@ -9,3 +9,10 @@ en:
         description: Description
         default_amount: Default Amount
         subscription_type: Type
+    enums:
+      subscription:
+        subscription_type:
+          monthly: Monthly
+          quarterly: Quarterly
+          semiannual: Semi-Annual
+          annual: Annual

@@ -1,6 +1,6 @@
 <div class="w-full mb-6">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-    <h2 class="text-2xl font-bold text-gray-900">Subscriptions</h2>
+    <h2 class="text-2xl font-bold text-gray-900"><%= t("views.console.subscriptions.index.title") %></h2>
     <%= link_to new_account_console_subscription_path, class: 'btn btn-primary' do %>
       <svg class="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -17,7 +17,7 @@
             <th scope="col"><%= t('activerecord.attributes.subscription.description') %></th>
             <th scope="col"><%= t('activerecord.attributes.subscription.default_amount') %></th>
             <th scope="col"><%= t('activerecord.attributes.subscription.subscription_type') %></th>
-            <th scope="col" class="text-right">Actions</th>
+            <th scope="col" class="text-right"><%= t("labels.actions") %></th>
           </tr>
         </thead>
         <tbody>

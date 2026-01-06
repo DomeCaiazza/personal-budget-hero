@@ -2,13 +2,13 @@
 <div class="w-full">
   <% if @categories.any? %>
     <% if @categories.expenses.any? %>
-      <h2 class="text-xl font-bold text-gray-900 mb-4">Expenses</h2>
+      <h2 class="text-xl font-bold text-gray-900 mb-4"><%= t("labels.expenses") %></h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
         <%= render partial: 'webapp/categories/category_card', collection: @categories.expenses, as: :category %>
       </div>
     <% end %>
     <% if @categories.incomes.any? %>
-      <h2 class="text-xl font-bold text-gray-900 mb-4">Incomes</h2>
+      <h2 class="text-xl font-bold text-gray-900 mb-4"><%= t("labels.incomes") %></h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         <%= render partial: 'webapp/categories/category_card', collection: @categories.incomes, as: :category %>
       </div>
